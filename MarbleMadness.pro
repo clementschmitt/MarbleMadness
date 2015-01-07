@@ -1,10 +1,24 @@
-TEMPLATE = app
-CONFIG += console
-CONFIG -= app_bundle
-CONFIG -= qt
+INCLUDEPATH += $$PWD
+SOURCES += $$PWD/openglwindow.cpp \
+    gamewindow.cpp \
+    camera.cpp \
+    objet3d.cpp \
+    model.cpp \
+    entity.cpp \
+    ball.cpp
+HEADERS += $$PWD/openglwindow.h \
+    gamewindow.h \
+    camera.h \
+    objet3d.h \
+    model.h \
+    entity.h \
+    ball.h
 
-SOURCES += main.cpp
+SOURCES += \
+    main.cpp
 
-include(deployment.pri)
-qtcAddDeployment()
+target.path = .
+INSTALLS += target
 
+RESOURCES += \
+    gestionnaire.qrc
