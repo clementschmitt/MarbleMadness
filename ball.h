@@ -7,6 +7,8 @@ class Ball : public Entity
 {
 public:
     Ball();
+
+    int CollisionBallWall(Entity);
 };
 
 #endif // BALL_H
