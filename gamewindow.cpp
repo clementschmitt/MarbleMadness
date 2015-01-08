@@ -62,31 +62,11 @@ void GameWindow::render()
     glScalef(model->getCamera()->getSS(),model->getCamera()->getSS(),model->getCamera()->getSS());
     glRotatef(model->getCamera()->getRotX(),1.0f,0.0f,0.0f);
     glRotatef(model->getCamera()->getRotY(),0.0f,0.0f,1.0f);
-    switch(model->getEtat())
-    {
-    case 0:
-        displayPoints();
-        break;
-    case 1:
-        displayLines();
-        break;
-    case 2:
-        displayTriangles();
-        break;
-    case 3:
-        displayTrianglesC();
-        break;
-    case 4:
-        displayTrianglesTexture();
-        break;
-    case 5:
-        displayTrianglesTexture();
-        displayLines();
-        break;
-    default:
-        displayPoints();
-        break;
-    }
+
+    drawLevel();
+    drawBall();
+    applyPhysic();
+    collissionDetection();
 
 
     ++m_frame;
