@@ -1,6 +1,4 @@
 #include "gamewindow.h"
-#include "model.h"
-#include "controller.h"
 
 #include <QtGui/QGuiApplication>
 #include <QtGui/QMatrix4x4>

@@ -19,19 +19,20 @@ using namespace std;
 
 GameWindow::GameWindow()
 {
-    time = new QTimer(this);
-    connect(time, SIGNAL(timeout()), this, SLOT(renderNow()));
-    time->start(60);
+    cam = new Camera();
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(renderNow()));
+    timer->start(60);
 }
 
-GameWindow::GameWindow(int timestep){
+GameWindow::GameWindow(int timestep, Level level){
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(renderNow()));
     timer->start(((double)1/timestep)*1000);
 }
 
 GameWindow::~GameWindow(){
-    delete time;
+    delete timer;
 }
 
 void GameWindow::initialize()
@@ -88,16 +89,16 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
     switch(event->key())
     {
     case Qt::UpArrow :
-        playerForce.setY(playerForce.y()+10);
+        playerForce->setY(playerForce->y()+10);
         break;
     case Qt::DownArrow :
-        playerForce.setY(playerForce.y()-10);
+        playerForce->setY(playerForce->y()-10);
         break;
     case Qt::LeftArrow :
-        playerForce.setX(playerForce.x()+10);
+        playerForce->setX(playerForce->x()+10);
         break;
     case Qt::RightArrow :
-        playerForce.setX(playerForce.x()-10);
+        playerForce->setX(playerForce->x()-10);
         break;
     }
 }

@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include <QVector3D>
+#include <QString>
 
 class Entity
 {
@@ -9,7 +10,6 @@ public:
     Entity();
     Entity(QString); //Récupère les données d'un modèle 3D avec son localPath
 
-    ~Entity();
 
     QVector3D getPoint(int);
     int* getFaces(int);

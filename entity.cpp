@@ -10,17 +10,17 @@ Entity::Entity(QString s)
 {
 }
 
-Entity::getPoint(int i){return point[i];}
+QVector3D Entity::getPoint(int i){return point[i];}
 
-Entity::getFaces(int i){return faces[i];}
+int* Entity::getFaces(int i){return faces[i];}
 
-Entity::getPpf(int i){return ppf[i];}
+int Entity::getPpf(int i){return ppf[i];}
 
-Entity::getNbFaces(){return nbFaces;}
+int Entity::getNbFaces(){return nbFaces;}
 
-Entity::getNbPoints(){return nbPoints;}
+int Entity::getNbPoints(){return nbPoints;}
 
-Entity::LoadModel(Qstring s)
+void Entity::LoadModel(QString s)
 {
 
 }

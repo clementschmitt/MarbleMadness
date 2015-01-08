@@ -22,13 +22,12 @@ public:
     void keyPressEvent(QKeyEvent *event);
 
 private:
-
     int m_frame;
     QTimer* timer;
-    Camera cam;
+    Camera* cam;
     Ball player;
     Level level;
-    QVector2D playerForce;
+    QVector2D* playerForce;
 };
 
 
