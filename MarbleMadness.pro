@@ -5,14 +5,16 @@ SOURCES += $$PWD/openglwindow.cpp \
     objet3d.cpp \
     model.cpp \
     entity.cpp \
-    ball.cpp
+    ball.cpp \
+    level.cpp
 HEADERS += $$PWD/openglwindow.h \
     gamewindow.h \
     camera.h \
     objet3d.h \
     model.h \
     entity.h \
-    ball.h
+    ball.h \
+    level.h
 
 SOURCES += \
     main.cpp
