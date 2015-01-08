@@ -3,14 +3,16 @@
 
 #include <QTimer>
 #include "openglwindow.h"
+#include "camera.h"
 #include "ball.h"
 #include "entity.h"
+#include "level.h"
 
 class GameWindow : public OpenGLWindow
 {
 public:
     GameWindow();
-    GameWindow(int);
+    GameWindow(int, Level);
 
     ~GameWindow();
 
@@ -19,21 +21,14 @@ public:
     bool event(QEvent *event);
     void keyPressEvent(QKeyEvent *event);
 
-    void displayTriangles();
-    void displayLines();
-    void displayTrianglesC();
-    void displayPoints();
-    void displayTrianglesTexture();
-
-    void displayColor(float);
-
 private:
 
     int m_frame;
     QTimer* timer;
+    Camera cam;
     Ball player;
-    QVector<Entity> walls;
-
+    Level level;
+    QVector2D playerForce;
 };
 
 
