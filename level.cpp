@@ -2,6 +2,9 @@
 
 Level::Level()
 {
+    Plateform p = Plateform();
+    plateformComponents(0) = p;
+    player = Ball();
 }
 
 int Level::getNbPlateformComponent(){return nbPlateformComponent;}

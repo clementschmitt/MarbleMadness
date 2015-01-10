@@ -80,7 +80,7 @@ void GameWindow::render()
  * @param width: largeur de notre plateforme
  * @param level: la scène à afficher
  */
-void GameWindow::drawLevel(float width)
+void GameWindow::drawLevel()
 {
     QVector3D point;
 

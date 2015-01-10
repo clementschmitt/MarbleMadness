@@ -30,7 +30,7 @@ public:
     void addForce(QVector3D);
 
 protected:
-    QVector3D *point; // ensemble des points de notre objet
+    QVector3D* point; // ensemble des points de notre objet
     int** faces; //ensemble des faces de notre objet
     int* ppf; //nombre points par face (ppf)
     int nbFaces; //nombre de face dans notre objet
