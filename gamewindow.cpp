@@ -67,7 +67,6 @@ void GameWindow::render()
     glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
 
     //drawLevel();
-    //drawBall();
     level.applyGravity(playerForce);
     level.collisionDetection();
 
