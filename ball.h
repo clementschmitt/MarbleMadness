@@ -5,12 +5,15 @@
 
 class Ball : public Entity
 {
-private:
-
 public:
     Ball();
 
     void applyForce(int);
+    float getRadius();
+
+
+protected:
+    float radius;
 };
 
 #endif // BALL_H

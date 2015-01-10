@@ -24,6 +24,7 @@ public:
 
     void initialize();
     void movePoints(QVector3D);
+
 protected:
     QVector3D *point; // ensemble des points de notre objet
     int** faces; //ensemble des faces de notre objet

@@ -117,9 +117,7 @@ void GameWindow::collisionDetection()
         Plateform p = level.getWall(i);
         if(sphereToPlane(p))
         {
-
             player.setPosition();
-        }
     }
 }
 
@@ -135,7 +133,7 @@ bool GameWindow::sphereToPlane(Plateform p)
 
     qreal dist = QVector3D.dotProduct(tmp, p.getNormal());
 
-    if(dist > player.getRadius)
+    if(dist > player.getRadius())
         return false;
     else
         return true;
