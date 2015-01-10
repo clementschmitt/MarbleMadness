@@ -1,4 +1,4 @@
-#include "StaticConstant.h"
+#include "staticConstant.h"
 
 QVector3D StaticConstant::gravity = QVector3D(0, 9.8, 0);
 

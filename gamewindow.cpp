@@ -67,11 +67,43 @@ void GameWindow::render()
     glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
 
     //drawLevel();
+
+    //drawBall();
     level.applyGravity(playerForce);
     level.collisionDetection();
 
 
     ++m_frame;
+}
+
+/**
+ * @brief GameWindow::drawLevel
+ * @param width: largeur de notre plateforme
+ * @param level: la scène à afficher
+ */
+void GameWindow::drawLevel(float width)
+{
+    QVector3D point;
+
+    glColor3f(1.0f,1.0f,1.0f);
+    glBegin(GL_TRIANGLES);
+    for (int i = 0; i < level.getNbPlateformComponent() - 1; i++)
+    {
+        point = level.getPlateformComponent(i).getPoint(0);
+        glVertex3f(point.x(), point.y(), point.z());
+        point = level.getPlateformComponent(i).getPoint(1);
+        glVertex3f(point.x(), point.y(), point.z());
+        point = level.getPlateformComponent(i).getPoint(4);
+        glVertex3f(point.x(), point.y(), point.z());
+
+        point = level.getPlateformComponent(i).getPoint(1);
+        glVertex3f(point.x(), point.y(), point.z());
+        point = level.getPlateformComponent(i).getPoint(3);
+        glVertex3f(point.x(), point.y(), point.z());
+        point = level.getPlateformComponent(i).getPoint(4);
+        glVertex3f(point.x(), point.y(), point.z());
+    }
+    glEnd();
 }
 
 bool GameWindow::event(QEvent *event)
