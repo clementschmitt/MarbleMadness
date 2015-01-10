@@ -16,6 +16,9 @@ public:
     int getPpf(int);
     int getNbFaces();
     int getNbPoints();
+    int getCenterPosition();
+
+    void setCenterPosition(QVector3D);
 
     void LoadModel(QString);
 
@@ -28,7 +31,7 @@ protected:
     int nbFaces; //nombre de face dans notre objet
     int nbPoints; //nombre de points dans notre objet
 
-    QVector3D position; // position du modèle 3D dans la scène
+    QVector3D centerPosition; // position du modèle 3D dans la scène
     QVector3D force; // total des forces appliqués à notre entité
 
     float velocity;
