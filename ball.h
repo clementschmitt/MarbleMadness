@@ -14,6 +14,7 @@ public:
 
 protected:
     float radius;
+
 };
 
 #endif // BALL_H

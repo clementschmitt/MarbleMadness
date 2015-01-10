@@ -20,16 +20,16 @@ int Entity::getNbFaces(){return nbFaces;}
 
 int Entity::getNbPoints(){return nbPoints;}
 
-int Entity::getCenterPosition(){return centerPosition;}
+QVector3D Entity::getCenterPosition(){return centerPosition;}
 
-void Entity::setCenterPositon(QVector3D position){centerPosition = position;}
+void Entity::setCenterPosition(QVector3D position){centerPosition = position;}
 
 void Entity::LoadModel(QString s)
 {
 
 }
 
-void Entity::movePoints(QVector3D movement)
+void Entity::translate(QVector3D movement)
 {
     for(int i = 0; i < nbPoints; i++)
         point[i] += movement;

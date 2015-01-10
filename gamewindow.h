@@ -22,10 +22,6 @@ public:
     bool event(QEvent *event);
     void keyPressEvent(QKeyEvent *event);
 
-    void applyGravity();
-    void collisionDetection();
-    bool sphereToPlane(Plateform);
-
 private:
     int m_frame;
     QTimer* timer;

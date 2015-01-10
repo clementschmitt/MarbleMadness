@@ -4,9 +4,9 @@ Ball::Ball()
 {
 }
 
-void Ball::applyVelocity(int timestep)
+void Ball::applyForce(int timestep)
 {
     velocity += (force / massValue) * timestep;
-    center += velocity * timestep;
-    movePoints(velocity * timestep);
+    centerPosition += velocity * timestep;
+    translate(velocity * timestep);
 }

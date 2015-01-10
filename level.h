@@ -9,6 +9,10 @@ public:
     int getNbComponents();
     Entity* getLevelComponents();
 
+    void applyGravity();
+    void collisionDetection();
+    bool sphereToPlane(Plateform);
+
 protected:
     Entity* levelComponents;
     int nbComponents;
