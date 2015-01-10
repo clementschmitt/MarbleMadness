@@ -106,3 +106,54 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
         break;
     }
 }
+<<<<<<< HEAD
+=======
+
+/**
+ * @brief GameWindow::collisionDetection
+ * Check collision between ball and all other wall
+ */
+void GameWindow::collisionDetection()
+{
+    for(int i; i < level.getNbWalls(); i++)
+    {
+        Plateform p = level.getWall(i);
+        if(sphereToPlane(p))
+        {
+            player.translate();
+        }
+    }
+}
+
+/**
+ * @brief sphereToPlane
+ * @param p
+ * @return True if collision between the ball and plateform p
+ */
+bool GameWindow::sphereToPlane(Plateform p)
+{
+
+    QVector3D tmp = player.getCenterPosition() - p.getCenterPosition();
+
+    qreal dist = QVector3D.dotProduct(tmp, p.getNormal());
+
+    if(dist > player.getRadius())
+        return false;
+    else
+        return true;
+}
+
+/**
+ * @brief GameWindow::applyGravity
+ * Apply Gravity + Force on our ball
+ */
+void GameWindow::applyGravity()
+{
+    player.initialize();
+
+    player.addForce(gravity * player.getMass());
+    player.addForce(playerForce * player.getMass());
+
+    player.applyForce(timestep);
+}
+>>>>>>> 924d8a7606ddd8f49ecde23db3c0daa8fab2006d
