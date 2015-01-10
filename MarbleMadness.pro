@@ -4,13 +4,15 @@ SOURCES += $$PWD/openglwindow.cpp \
     camera.cpp \
     entity.cpp \
     ball.cpp \
-    level.cpp
+    level.cpp \
+    plateform.cpp
 HEADERS += $$PWD/openglwindow.h \
     gamewindow.h \
     camera.h \
     entity.h \
     ball.h \
-    level.h
+    level.h \
+    plateform.h
 
 SOURCES += \
     main.cpp

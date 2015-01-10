@@ -25,14 +25,16 @@ GameWindow::GameWindow()
     timer->start(60);
 }
 
-GameWindow::GameWindow(int ts, Level level){
+GameWindow::GameWindow(int ts, Level level)
+{
     timestep = ((double)1/ts)*1000;
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(renderNow()));
     timer->start(((double)1/ts)*1000);
 }
 
-GameWindow::~GameWindow(){
+GameWindow::~GameWindow()
+{
     delete timer;
 }
 
@@ -66,7 +68,7 @@ void GameWindow::render()
     //drawLevel();
     //drawBall();
     applyGravity();
-    collissionDetection();
+    collisionDetection();
 
 
     ++m_frame;
@@ -104,10 +106,17 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void GameWindow::collisionDetection(){
-    for(int i; i < level.getNbWalls(); i++){
+/**
+ * @brief GameWindow::collisionDetection
+ * Check collision between ball and all other wall
+ */
+void GameWindow::collisionDetection()
+{
+    for(int i; i < level.getNbWalls(); i++)
+    {
         Plateform p = level.getWall(i);
-        if(sphereToPlane(p)){
+        if(sphereToPlane(p))
+        {
 
             player.setPosition();
         }
@@ -117,13 +126,14 @@ void GameWindow::collisionDetection(){
 /**
  * @brief sphereToPlane
  * @param p
- * @return True if collision between the ball and plateform
+ * @return True if collision between the ball and plateform p
  */
-bool GameWindow::sphereToPlane(Plateform p){
+bool GameWindow::sphereToPlane(Plateform p)
+{
 
-    QVector3D tmp = player.getCenter() - p.getCenter();
+    QVector3D tmp = player.getCenterPosition() - p.getCenterPosition();
 
-    float dist = QVector3D.dotProduct(tmp, p.getNormal());
+    qreal dist = QVector3D.dotProduct(tmp, p.getNormal());
 
     if(dist > player.getRadius)
         return false;
@@ -131,8 +141,12 @@ bool GameWindow::sphereToPlane(Plateform p){
         return true;
 }
 
-void GameWindow::applyGravity(){
-
+/**
+ * @brief GameWindow::applyGravity
+ * Apply Gravity + Force on our ball
+ */
+void GameWindow::applyGravity()
+{
     player.initialize();
 
     player.addForce(gravity * player.getMass());

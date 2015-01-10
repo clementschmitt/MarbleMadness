@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "ball.h"
 #include "entity.h"
+#include "plateform.h"
 #include "level.h"
 
 class GameWindow : public OpenGLWindow
