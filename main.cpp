@@ -27,8 +27,6 @@ int main(int argc, char **argv)
     QSurfaceFormat format;
     format.setSamples(16);
 
-    Ball b(4,4);
-    std::cout<<"Fin de programme"<<std::endl;
     /*
     GameWindow window(c,120);
     window1.setFormat(format);

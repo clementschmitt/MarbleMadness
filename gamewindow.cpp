@@ -81,7 +81,7 @@ void GameWindow::render()
  * @param width: largeur de notre plateforme
  * @param level: la scène à afficher
  */
-void GameWindow::drawLevel(float width)
+void GameWindow::drawLevel()
 {
     QVector3D point;
 
@@ -102,6 +102,24 @@ void GameWindow::drawLevel(float width)
         glVertex3f(point.x(), point.y(), point.z());
         point = level.getPlateformComponent(i).getPoint(4);
         glVertex3f(point.x(), point.y(), point.z());
+    }
+    glEnd();
+}
+
+void GameWindow::drawBall()
+{
+    Ball player = level.getPlayer();
+
+    glColor3f(1.0f,1.0f,1.0f);
+    glBegin(GL_TRIANGLES);
+    for(int i = 0; i < player.getNbFaces(); i++)
+    {
+        for(int j = 0; j < player.getPpf(i); j++)
+        {
+            glVertex3f(player.getPoint(player.getFaces(i)[j]).x(),
+                       player.getPoint(player.getFaces(i)[j]).y(),
+                       player.getPoint(player.getFaces(i)[j]).z());
+        }
     }
     glEnd();
 }

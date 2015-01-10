@@ -13,6 +13,7 @@ public:
 
     int getNbPlateformComponent();
     Plateform getPlateformComponent(int);
+    Ball getPlayer();
 
     void applyGravity(QVector3D);
     void collisionDetection();
