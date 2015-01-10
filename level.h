@@ -1,17 +1,21 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
+#include "entity.h"
+#include "plateform.h"
+#include "ball.h"
+
 class Level
 {
 public:
     Level();
 
-    int getNbComponents();
-    Entity* getLevelComponents();
+    int getNbPlateformComponent();
+    Entity* getPlateformComponent();
 
 protected:
-    Entity* levelComponents;
-    int nbComponents;
+    Plateform* plateformComponents;
+    int nbPlateformComponent;
 
 };
 

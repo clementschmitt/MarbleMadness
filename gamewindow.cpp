@@ -117,7 +117,8 @@ void GameWindow::collisionDetection()
         Plateform p = level.getWall(i);
         if(sphereToPlane(p))
         {
-            player.setPosition();
+            player.translate();
+        }
     }
 }
 
