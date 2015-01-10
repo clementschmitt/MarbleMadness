@@ -65,8 +65,8 @@ void GameWindow::render()
 
     //drawLevel();
     //drawBall();
-    //applyGravity();
-    //collissionDetection();
+    applyGravity();
+    collissionDetection();
 
 
     ++m_frame;
@@ -104,7 +104,7 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void collisionDetection(){
+void GameWindow::collisionDetection(){
     for(int i; i < level.getNbWalls(); i++){
         Plateform p = level.getWall(i);
         if(sphereToPlane(p)){
@@ -119,7 +119,7 @@ void collisionDetection(){
  * @param p
  * @return True if collision between the ball and plateform
  */
-bool sphereToPlane(Plateform p){
+bool GameWindow::sphereToPlane(Plateform p){
 
     QVector3D tmp = player.getCenter() - p.getCenter();
 
@@ -131,7 +131,7 @@ bool sphereToPlane(Plateform p){
         return true;
 }
 
-void applyGravity(){
+void GameWindow::applyGravity(){
 
     player.initialize();
 

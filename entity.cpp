@@ -25,7 +25,7 @@ void Entity::LoadModel(QString s)
 
 }
 
-void Entity:movePoints(QVector3D movement){
+void Entity::movePoints(QVector3D movement){
     for(int i = 0; i < nbPoints; i++){
         point[i] += movement;
     }
