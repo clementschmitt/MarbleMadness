@@ -67,12 +67,32 @@ void GameWindow::render()
     glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
 
     //drawLevel();
-    //drawBall();
+
     level.applyGravity(playerForce);
     level.collisionDetection();
 
 
     ++m_frame;
+}
+
+void GameWindow::drawLevel(float width, Level level)
+{
+    QVector3D center;
+
+    glColor3f(1.0f,1.0f,1.0f);
+    glBegin(GL_TRIANGLES);
+    for (int i = 0; i < level.nbPlateformComponent - 1; i++)
+    {
+        center = level.plateformComponents[i].centerPosition;
+        glVertex3f(center.x - width/2.0f, 0.0f, center.z - width/2.0f);
+        glVertex3f(center.x - width/2.0f, 0.0f, center.z + width/2.0f);
+        glVertex3f(center.x + width/2.0f, 0.0f, center.z - width/2.0f);
+
+        glVertex3f(center.x + width/2.0f, 0.0f, center.z - width/2.0f);
+        glVertex3f(center.x + width/2.0f, 0.0f, center.z + width/2.0f);
+        glVertex3f(center.x - width/2.0f, 0.0f, center.z - width/2.0f);
+    }
+    glEnd();
 }
 
 bool GameWindow::event(QEvent *event)
