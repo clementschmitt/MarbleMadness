@@ -17,4 +17,3 @@ SOURCES += \
 
 target.path = .
 INSTALLS += target
-

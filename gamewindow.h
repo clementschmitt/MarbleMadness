@@ -21,13 +21,19 @@ public:
     bool event(QEvent *event);
     void keyPressEvent(QKeyEvent *event);
 
+    void applyGravity();
+    void collisionDetection();
+    bool sphereToPlane(Plateform);
+
 private:
     int m_frame;
     QTimer* timer;
+    int timestep;
     Camera* cam;
     Ball player;
     Level level;
-    QVector2D* playerForce;
+    QVector3D* playerForce;
+    QVector3D gravity;
 };
 
 

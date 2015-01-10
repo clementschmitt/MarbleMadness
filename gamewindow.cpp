@@ -25,10 +25,11 @@ GameWindow::GameWindow()
     timer->start(60);
 }
 
-GameWindow::GameWindow(int timestep, Level level){
+GameWindow::GameWindow(int ts, Level level){
+    timestep = ((double)1/ts)*1000;
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(renderNow()));
-    timer->start(((double)1/timestep)*1000);
+    timer->start(((double)1/ts)*1000);
 }
 
 GameWindow::~GameWindow(){
@@ -64,8 +65,8 @@ void GameWindow::render()
 
     //drawLevel();
     //drawBall();
-    //applyGravity();
-    //collissionDetection();
+    applyGravity();
+    collissionDetection();
 
 
     ++m_frame;
@@ -103,3 +104,39 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void GameWindow::collisionDetection(){
+    for(int i; i < level.getNbWalls(); i++){
+        Plateform p = level.getWall(i);
+        if(sphereToPlane(p)){
+
+            player.setPosition();
+        }
+    }
+}
+
+/**
+ * @brief sphereToPlane
+ * @param p
+ * @return True if collision between the ball and plateform
+ */
+bool GameWindow::sphereToPlane(Plateform p){
+
+    QVector3D tmp = player.getCenter() - p.getCenter();
+
+    float dist = QVector3D.dotProduct(tmp, p.getNormal());
+
+    if(dist > player.getRadius)
+        return false;
+    else
+        return true;
+}
+
+void GameWindow::applyGravity(){
+
+    player.initialize();
+
+    player.addForce(gravity * player.getMass());
+    player.addForce(playerForce * player.getMass());
+
+    player.applyForce(timestep);
+}

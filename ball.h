@@ -10,7 +10,7 @@ private:
 public:
     Ball();
 
-    int CollisionBallWall(Entity);
+    void applyForce(int);
 };
 
 #endif // BALL_H
