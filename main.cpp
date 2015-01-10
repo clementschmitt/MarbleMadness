@@ -27,14 +27,14 @@ int main(int argc, char **argv)
     QSurfaceFormat format;
     format.setSamples(16);
 
-    Ball b(4,4);
+    Level l;
     std::cout<<"Fin de programme"<<std::endl;
-    /*
-    GameWindow window(c,120);
-    window1.setFormat(format);
-    window1.resize(640, 480);
-    window1.show();
-    */
+
+    GameWindow window(l);
+    window.setFormat(format);
+    window.resize(640, 480);
+    window.show();
+
     return app.exec();
 }
 

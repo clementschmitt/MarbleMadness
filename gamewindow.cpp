@@ -1,22 +1,5 @@
 #include "gamewindow.h"
 
-#include <QtGui/QGuiApplication>
-#include <QtGui/QMatrix4x4>
-#include <QtGui/QOpenGLShaderProgram>
-#include <QtGui/QScreen>
-
-#include <QtCore/qmath.h>
-#include <QMouseEvent>
-#include <QKeyEvent>
-#include <time.h>
-#include <sys/time.h>
-#include <iostream>
-
-#include <QtCore>
-#include <QtGui>
-using namespace std;
-
-
 GameWindow::GameWindow()
 {
     cam = new Camera();
@@ -25,13 +8,12 @@ GameWindow::GameWindow()
     timer->start(60);
 }
 
-GameWindow::GameWindow(int ts, Level l)
+GameWindow::GameWindow(Level l)
 {
     level = l;
-    timestep = ((double)1/ts)*1000;
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(renderNow()));
-    timer->start(((double)1/ts)*1000);
+    timer->start(StaticConstant::timestep * 1000.0f);
 }
 
 GameWindow::~GameWindow()
