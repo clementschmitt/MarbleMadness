@@ -20,6 +20,10 @@ int Entity::getNbFaces(){return nbFaces;}
 
 int Entity::getNbPoints(){return nbPoints;}
 
+int Entity::getCenterPosition(){return centerPosition;}
+
+void Entity::setCenterPositon(QVector3D position){centerPosition = position;}
+
 void Entity::LoadModel(QString s)
 {
 
