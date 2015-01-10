@@ -45,12 +45,9 @@ public:
 private:
     int m_frame;
     QTimer* timer;
-    int timestep;
     Camera* cam;
-    Ball player;
     Level level;
     QVector3D playerForce;
-    QVector3D gravity;
 };
 
 

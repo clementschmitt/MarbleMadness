@@ -14,6 +14,8 @@ GameWindow::GameWindow(Level l)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(renderNow()));
     timer->start(StaticConstant::timestep * 1000.0f);
+    cam = new Camera();
+    cout<<"Fin creation"<<endl;
 }
 
 GameWindow::~GameWindow()
@@ -33,14 +35,15 @@ void GameWindow::initialize()
     glLoadIdentity();
     glOrtho(-1.0, 1.0, -1.0, 1.0, -100.0, 100.0);
 
-    //model->getCamera()->setSS(1);
-    //model->getCamera()->setRotX(45);
-    //model->getCamera()->setRotY(45);
+    cam->setSS(1);
+    cam->setRotX(45);
+    cam->setRotY(45);
+    cout<<"End of Initialization"<<endl;
 }
 
 void GameWindow::render()
 {
-
+    cout<<"Debut de frame"<<endl;
     glClear(GL_COLOR_BUFFER_BIT);
 
     glLoadIdentity();
