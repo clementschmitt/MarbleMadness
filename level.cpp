@@ -4,9 +4,9 @@ Level::Level()
 {
 }
 
-int Level::getNbComponents(){return nbComponents;}
+int Level::getNbPlateformComponent(){return nbPlateformComponent;}
 
-Entity* Level::getLevelComponents(){return levelComponents;}
+Plateform Level::getPlateformComponent(int index){return plateformComponents[index];}
 
 /**
  * @brief GameWindow::collisionDetection
@@ -14,12 +14,12 @@ Entity* Level::getLevelComponents(){return levelComponents;}
  */
 void Level::collisionDetection()
 {
-    for(int i; i < level.getNbWalls(); i++)
+    for(int i; i < getNbPlateformComponent(); i++)
     {
-        Plateform p = level.getWall(i);
+        Plateform p = getPlateformComponent(i);
         if(sphereToPlane(p))
         {
-            player.setPosition();
+            player.translate(QVector3D(0,0,0));
         }
     }
 }
@@ -34,7 +34,7 @@ bool Level::sphereToPlane(Plateform p)
 
     QVector3D tmp = player.getCenterPosition() - p.getCenterPosition();
 
-    qreal dist = QVector3D.dotProduct(tmp, p.getNormal());
+    qreal dist = 0; //= QVector3D.dotProduct(tmp, p.getNormal());
 
     if(dist > player.getRadius())
         return false;
@@ -46,12 +46,12 @@ bool Level::sphereToPlane(Plateform p)
  * @brief GameWindow::applyGravity
  * Apply Gravity + Force on our ball
  */
-void Level::applyGravity()
+void Level::applyGravity(QVector3D playerForce)
 {
     player.initialize();
 
-    player.addForce(gravity * player.getMass());
-    player.addForce(playerForce * player.getMass());
+    player.addForce(StaticConstant::gravity * player.getMassValue());
+    player.addForce(playerForce * player.getMassValue());
 
-    player.applyForce(timestep);
+    player.applyForce(StaticConstant::timestep);
 }

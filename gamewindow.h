@@ -29,7 +29,7 @@ private:
     Camera* cam;
     Ball player;
     Level level;
-    QVector3D* playerForce;
+    QVector3D playerForce;
     QVector3D gravity;
 };
 

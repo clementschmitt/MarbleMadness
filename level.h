@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "plateform.h"
 #include "ball.h"
+#include "StaticConstant.h"
 
 class Level
 {
@@ -11,15 +12,16 @@ public:
     Level();
 
     int getNbPlateformComponent();
-    Entity* getPlateformComponent();
+    Plateform getPlateformComponent(int);
 
-    void applyGravity();
+    void applyGravity(QVector3D);
     void collisionDetection();
     bool sphereToPlane(Plateform);
 
 protected:
     Plateform* plateformComponents;
     int nbPlateformComponent;
+    Ball player;
 
 };
 

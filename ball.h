@@ -8,7 +8,6 @@ class Ball : public Entity
 public:
     Ball();
 
-    void applyForce(int);
     float getRadius();
 
 

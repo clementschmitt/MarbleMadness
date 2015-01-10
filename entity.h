@@ -16,6 +16,7 @@ public:
     int getPpf(int);
     int getNbFaces();
     int getNbPoints();
+    float getMassValue();
     QVector3D getCenterPosition();
 
     void setCenterPosition(QVector3D);
@@ -24,6 +25,9 @@ public:
 
     void initialize();
     void translate(QVector3D);
+
+    void applyForce(int);
+    void addForce(QVector3D);
 
 protected:
     QVector3D *point; // ensemble des points de notre objet
