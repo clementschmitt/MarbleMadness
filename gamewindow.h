@@ -19,7 +19,7 @@ public:
 
     void initialize();
     void render();
-    void drawLevel(int, Level);
+    void drawLevel(float);
     bool event(QEvent *event);
     void keyPressEvent(QKeyEvent *event);
 

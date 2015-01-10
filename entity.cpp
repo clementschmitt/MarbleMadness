@@ -10,7 +10,7 @@ Entity::Entity(QString s)
 {
 }
 
-QVector3D Entity::getPoint(int i){return point[i];}
+QVector3D Entity::getPoint(int index){return point[index];}
 
 int* Entity::getFaces(int i){return faces[i];}
 
