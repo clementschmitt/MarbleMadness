@@ -11,7 +11,7 @@ Entity::Entity(QString s)
 {
 }
 
-QVector3D Entity::getPoint(int index){return point[index];}
+QVector3D Entity::getPoint(int i){return points[i];}
 
 int* Entity::getFaces(int i){return faces[i];}
 
@@ -38,7 +38,7 @@ void Entity::initialize(){}
 void Entity::translate(QVector3D movement)
 {
     for(int i = 0; i < nbPoints; i++)
-        point[i] += movement;
+        points[i] += movement;
 }
 
 void Entity::applyForce(int timestep)

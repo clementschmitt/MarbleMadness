@@ -3,7 +3,7 @@
 Level::Level()
 {
     Plateform p = Plateform();
-    plateformComponents(0) = p;
+    plateformComponents[0] = p;
     player = Ball();
 }
 
