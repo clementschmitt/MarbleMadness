@@ -28,6 +28,12 @@ void Level::collisionDetection()
 }
 
 /**
+ * @brief getPlayer
+ * @return return ball controlling by player
+ */
+Ball Level::getPlayer(){return player;}
+
+/**
  * @brief sphereToPlane
  * @param p
  * @return True if collision between the ball and plateform p

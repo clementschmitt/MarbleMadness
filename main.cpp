@@ -28,7 +28,6 @@ int main(int argc, char **argv)
     format.setSamples(16);
 
     Level l;
-    std::cout<<"Fin de programme"<<std::endl;
 
     GameWindow window(l);
     window.setFormat(format);
