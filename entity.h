@@ -3,6 +3,9 @@
 
 #include <QVector3D>
 #include <QString>
+#include <iostream>
+
+using namespace std;
 
 class Entity
 {
