@@ -6,21 +6,21 @@ Level::Level()
     QVector3D *plateformPoints2 = new QVector3D[4];
 
     plateformPoints1[0] = QVector3D(-1, -1, -1);
-    plateformPoints1[1] = QVector3D(-1, -1, 1);
+    plateformPoints1[1] = QVector3D(1, -1, -1);
     plateformPoints1[2] = QVector3D(1, -1, 1);
-    plateformPoints1[3] = QVector3D(1, -1, -1);
+    plateformPoints1[3] = QVector3D(-1, -1, 1);
 
-    plateformPoints2[0] = QVector3D(-2, -1.5, -2);
+    plateformPoints2[0] = QVector3D(-2, -1.5, -1);
     plateformPoints2[1] = QVector3D(-1, -1, -1);
-    plateformPoints2[2] = QVector3D(1, -1, -1);
-    plateformPoints2[3] = QVector3D(1, -1.5, -2);
+    plateformPoints2[2] = QVector3D(-1, -1, 1);
+    plateformPoints2[3] = QVector3D(-2, -1.5, 1);
 
     std::cout <<"Creation du level"<<std::endl;
-    plateformComponents = new Plateform[2];
-    nbPlateformComponent = 2;
+    plateformComponents = new Plateform[1];
+    nbPlateformComponent = 1;
 
-    plateformComponents[0] = Plateform(plateformPoints1);
-    plateformComponents[1] = Plateform(plateformPoints2);
+    //plateformComponents[0] = Plateform(plateformPoints1);
+    //plateformComponents[1] = Plateform(plateformPoints2);
 
     player = Ball(28,28, QVector3D(0,1,0));
     std::cout<<"Fin creation Level"<<std::endl;

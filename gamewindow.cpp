@@ -42,8 +42,8 @@ void GameWindow::initialize()
     glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 
     cam->setSS(0.4);
-    cam->setRotX(94);
-    cam->setRotY(-91);
+    cam->setRotX(8);
+    cam->setRotY(34);
     cout<<"End of Initialization"<<endl;
 }
 
