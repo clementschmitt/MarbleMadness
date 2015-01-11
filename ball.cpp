@@ -5,6 +5,7 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
 {
     nbPoints = (horizontalBands+1) * (verticalBands+1);
     points = new QVector3D[nbPoints];
+    normals = new QVector3D[nbPoints];
     nbFaces = (horizontalBands * verticalBands) * 2;
     faces = new int*[nbFaces];
     ppf = new int[nbFaces];
