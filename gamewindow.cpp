@@ -39,9 +39,9 @@ void GameWindow::initialize()
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+    glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 
-    cam->setSS(1);
+    cam->setSS(0.5);
     cam->setRotX(45);
     cam->setRotY(45);
     cout<<"End of Initialization"<<endl;
@@ -58,19 +58,14 @@ void GameWindow::render()
     glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
     glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
 
-    /*glColor3f(1.0f,1.0f,1.0f);
-    glBegin(GL_QUADS);
-    glVertex3f(-1,-1,0);
-    glVertex3f(-1,1,0);
-    glVertex3f(1,1,0);
-    glVertex3f(1,-1,0);
-    glEnd();*/
-
     drawLevel();
 
     //drawBall();
     level->applyGravity(playerForce);
     level->collisionDetection();
+    drawBall();
+    /*level.applyGravity(playerForce);
+    level.collisionDetection();*/
 
     ++m_frame;
 }
@@ -112,6 +107,7 @@ void GameWindow::drawBall()
 
     glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_TRIANGLES);
+
     for(int i = 0; i < player.getNbFaces(); i++)
     {
         for(int j = 0; j < player.getPpf(i); j++)
@@ -121,6 +117,14 @@ void GameWindow::drawBall()
                        player.getPoint(player.getFaces(i)[j]).z());
         }
     }
+    /*
+    for(int i = 0; i < player.getNbPoints(); i++)
+    {
+        glVertex3f(player.getPoint(i).x(),
+                   player.getPoint(i).y(),
+                   player.getPoint(i).z());
+    }
+    */
     glEnd();
 }
 
