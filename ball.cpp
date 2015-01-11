@@ -5,6 +5,7 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
 {
     nbPoints = (horizontalBands+1) * (verticalBands+1);
     points = new QVector3D[nbPoints];
+    normals = new QVector3D[nbPoints];
     nbFaces = (horizontalBands * verticalBands) * 2;
     faces = new int*[nbFaces];
     ppf = new int[nbFaces];
@@ -30,11 +31,7 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
             float y = cosTheta;
             float z = sinPhi * sinTheta;
 
-            /*
-            normalData.push(x);
-            normalData.push(y);
-            normalData.push(z);
-            */
+            normals[horizontalNumber * (verticalBands+1) + verticalNumber] = QVector3D(x, y, z);
 
             points[horizontalNumber * (verticalBands+1) + verticalNumber] = QVector3D(radius * x + center.x(), radius * y + center.y(), radius * z + center.z());
         }

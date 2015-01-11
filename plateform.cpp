@@ -20,7 +20,11 @@ Plateform::Plateform(QVector3D *pts)
     useGravity = false;
     nbPoints = (int)points->length();
     points = new QVector3D[nbPoints];
+    normals = new QVector3D[nbPoints];
+
     points = pts;
+    for(int i = 0; i < nbPoints; i++)
+        normals[i] = getNormal();
 }
 
 QVector3D Plateform::getNormal()
