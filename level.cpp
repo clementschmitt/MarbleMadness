@@ -19,7 +19,7 @@ Plateform Level::getPlateformComponent(int index){return plateformComponents[ind
  */
 void Level::collisionDetection()
 {
-    for(int i; i < getNbPlateformComponent(); i++)
+    for(int i = 0; i < getNbPlateformComponent(); i++)
     {
         Plateform p = getPlateformComponent(i);
         if(sphereToPlane(p))

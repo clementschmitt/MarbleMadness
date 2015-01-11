@@ -58,19 +58,19 @@ void GameWindow::render()
     glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
     glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
 
-    glColor3f(1.0f,1.0f,1.0f);
+    /*glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_QUADS);
     glVertex3f(-1,-1,0);
     glVertex3f(-1,1,0);
     glVertex3f(1,1,0);
     glVertex3f(1,-1,0);
-    glEnd();
+    glEnd();*/
 
-    //drawLevel();
+    drawLevel();
 
-//drawBall();
-    /*level.applyGravity(playerForce);
-    level.collisionDetection();*/
+    //drawBall();
+    level->applyGravity(playerForce);
+    level->collisionDetection();
 
     ++m_frame;
 }
@@ -92,14 +92,14 @@ void GameWindow::drawLevel()
         glVertex3f(point.x(), point.y(), point.z());
         point = level->getPlateformComponent(i).getPoint(1);
         glVertex3f(point.x(), point.y(), point.z());
-        point = level.getPlateformComponent(i).getPoint(3);
+        point = level->getPlateformComponent(i).getPoint(3);
         glVertex3f(point.x(), point.y(), point.z());
 
         point = level->getPlateformComponent(i).getPoint(1);
         glVertex3f(point.x(), point.y(), point.z());
         point = level->getPlateformComponent(i).getPoint(2);
         glVertex3f(point.x(), point.y(), point.z());
-        point = level.getPlateformComponent(i).getPoint(3);
+        point = level->getPlateformComponent(i).getPoint(3);
         glVertex3f(point.x(), point.y(), point.z());
     }
     glEnd();
