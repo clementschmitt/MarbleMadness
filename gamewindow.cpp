@@ -80,14 +80,14 @@ void GameWindow::drawLevel()
         glVertex3f(point.x(), point.y(), point.z());
         point = level.getPlateformComponent(i).getPoint(1);
         glVertex3f(point.x(), point.y(), point.z());
-        point = level.getPlateformComponent(i).getPoint(4);
+        point = level.getPlateformComponent(i).getPoint(3);
         glVertex3f(point.x(), point.y(), point.z());
 
         point = level.getPlateformComponent(i).getPoint(1);
         glVertex3f(point.x(), point.y(), point.z());
-        point = level.getPlateformComponent(i).getPoint(3);
+        point = level.getPlateformComponent(i).getPoint(2);
         glVertex3f(point.x(), point.y(), point.z());
-        point = level.getPlateformComponent(i).getPoint(4);
+        point = level.getPlateformComponent(i).getPoint(3);
         glVertex3f(point.x(), point.y(), point.z());
     }
     glEnd();
