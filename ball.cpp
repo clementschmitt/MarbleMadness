@@ -8,8 +8,8 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
     nbFaces = (horizontalBands * verticalBands) * 2;
     faces = new int*[nbFaces];
     ppf = new int[nbFaces];
-    radius = 0.5;
 
+    radius = 0.5;
     useGravity = true;
     massValue = 1;
     centerPosition = center;

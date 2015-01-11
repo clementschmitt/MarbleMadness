@@ -37,6 +37,8 @@ void Entity::initialize(){}
 
 void Entity::translate(QVector3D movement)
 {
+
+    centerPosition += movement;
     for(int i = 0; i < nbPoints; i++)
         points[i] += movement;
 }
@@ -44,7 +46,6 @@ void Entity::translate(QVector3D movement)
 void Entity::applyForce()
 {
     velocity += (force / massValue) * StaticConstant::timestep;
-    centerPosition += velocity * StaticConstant::timestep;
     translate(velocity * StaticConstant::timestep);
 }
 

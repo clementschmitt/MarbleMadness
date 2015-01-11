@@ -19,14 +19,21 @@ Plateform Level::getPlateformComponent(int index){return plateformComponents[ind
  */
 void Level::collisionDetection()
 {
+    std::cout<<"Test collision"<<std::endl;
+    QVector3D* off = new QVector3D();
     for(int i = 0; i < getNbPlateformComponent(); i++)
     {
         Plateform p = getPlateformComponent(i);
-        if(sphereToPlane(p))
+        if(sphereToPlane(p, off))
         {
-            player.translate(QVector3D(0,0,0));
+            std::cout<<"Collision = ("<<off->x()<<", "<<off->y()<<", "<<off->z()<<")"<<std::endl;
+            player.translate(*(off));
+            std::cout<<"Ball_Position = ("<<player.getCenterPosition().x()<<", "<<player.getCenterPosition().y()<<", "<<player.getCenterPosition().z()<<")"<<std::endl;
         }
+        else
+            std::cout<<"No Collision"<<std::endl;
     }
+    std::cout<<"Fin test collision"<<std::endl;
 }
 
 /**
@@ -40,13 +47,15 @@ Ball Level::getPlayer(){return player;}
  * @param p
  * @return True if collision between the ball and plateform p
  */
-bool Level::sphereToPlane(Plateform p)
+bool Level::sphereToPlane(Plateform p, QVector3D* v)
 {
-
     QVector3D tmp = player.getCenterPosition() - p.getCenterPosition();
-
-    qreal dist = 0; //= QVector3D.dotProduct(tmp, p.getNormal());
-
+    v->setX(fabs((tmp*p.getNormal()).x()));
+    v->setY(fabs((tmp*p.getNormal()).y()));
+    v->setZ(fabs((tmp*p.getNormal()).z()));
+    qreal dist = QVector3D::dotProduct(tmp, p.getNormal());
+    std::cout<<"Distance = "<<dist<<std::endl;
+    std::cout<<"Ball_Position = ("<<player.getCenterPosition().x()<<", "<<player.getCenterPosition().y()<<", "<<player.getCenterPosition().z()<<")"<<std::endl;
     if(dist > player.getRadius())
         return false;
     else

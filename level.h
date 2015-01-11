@@ -17,7 +17,7 @@ public:
 
     void applyGravity(QVector3D);
     void collisionDetection();
-    bool sphereToPlane(Plateform);
+    bool sphereToPlane(Plateform, QVector3D*);
 
 protected:
     Plateform* plateformComponents;
