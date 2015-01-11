@@ -23,7 +23,18 @@ QColor Light::computeLighting(QVector3D p, QVector3D normal)
     //On calcul le vecteur entre le point et la lumière
     QVector3D vertexToLight = this->position - p;
     //Calcul de l'aténuation de la lumière d'un vertex (linéaire)
-    float attenuation = std::max<float>(0.0f, 1.0f - (vertexToLight.length() / radius));
+    float attenuation = 1.0f - (vertexToLight.length() / radius);
 
+    //Normalisation du vecteur
+    vertexToLight.normalize();
+    //Calcul du produit scalaire NdotL avec N la normal et L le vertexToLight
+    attenuation *= QVector3D::dotProduct(vertexToLight, normal);
+    attenuation = std::max<float>(0.0f, attenuation);
 
+    QColor col = this->color;
+    col.setRed(col.red() * attenuation);
+    col.setGreen(col.green() * attenuation);
+    col.setBlue(col.blue() * attenuation);
+
+    return col;
 }
