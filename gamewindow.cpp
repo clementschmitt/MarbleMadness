@@ -54,10 +54,11 @@ void GameWindow::render()
 
     glLoadIdentity();
 
+    /*
     glScalef(cam->getSS(), cam->getSS(),cam->getSS());
     glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
     glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
-
+    */
     /*
     glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_QUADS);
@@ -71,8 +72,8 @@ void GameWindow::render()
     //drawLevel();
 
     drawBall();
-    /*level.applyGravity(playerForce);
-    level.collisionDetection();*/
+    level->applyGravity(playerForce);
+    //level->collisionDetection();
 
     ++m_frame;
 }
@@ -124,14 +125,6 @@ void GameWindow::drawBall()
                        player.getPoint(player.getFaces(i)[j]).z());
         }
     }
-    /*
-    for(int i = 0; i < player.getNbPoints(); i++)
-    {
-        glVertex3f(player.getPoint(i).x(),
-                   player.getPoint(i).y(),
-                   player.getPoint(i).z());
-    }
-    */
     glEnd();
 }
 

@@ -41,11 +41,14 @@ void Entity::translate(QVector3D movement)
         points[i] += movement;
 }
 
-void Entity::applyForce(int timestep)
+void Entity::applyForce()
 {
-    velocity += (force / massValue) * timestep;
-    centerPosition += velocity * timestep;
-    translate(velocity * timestep);
+    velocity += (force / massValue) * StaticConstant::timestep;
+    centerPosition += velocity * StaticConstant::timestep;
+    translate(velocity * StaticConstant::timestep);
 }
 
-void Entity::addForce(QVector3D force){}
+void Entity::addForce(QVector3D f)
+{
+    force += f;
+}
