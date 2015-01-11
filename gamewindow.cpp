@@ -41,9 +41,9 @@ void GameWindow::initialize()
     glLoadIdentity();
     glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 
-    cam->setSS(0.5);
-    cam->setRotX(45);
-    cam->setRotY(45);
+    cam->setSS(0.4);
+    //cam->setRotX(0);
+    //cam->setRotY(0);
     cout<<"End of Initialization"<<endl;
 }
 
@@ -54,23 +54,11 @@ void GameWindow::render()
 
     glLoadIdentity();
 
-    /*
     glScalef(cam->getSS(), cam->getSS(),cam->getSS());
-    glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
-    glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
-    */
-    /*
-    glColor3f(1.0f,1.0f,1.0f);
-    glBegin(GL_QUADS);
-    glVertex3f(-1,-1,0);
-    glVertex3f(-1,1,0);
-    glVertex3f(1,1,0);
-    glVertex3f(1,-1,0);
-    glEnd();
-*/
+    //glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
+    //glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
 
-    //drawLevel();
-
+    drawLevel();
     drawBall();
     level->applyGravity(playerForce);
     //level->collisionDetection();
