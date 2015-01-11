@@ -16,11 +16,11 @@ Level::Level()
     plateformPoints2[3] = QVector3D(-2, -1.5, 1);
 
     std::cout <<"Creation du level"<<std::endl;
-    plateformComponents = new Plateform[1];
-    nbPlateformComponent = 1;
+    plateformComponents = new Plateform[2];
+    nbPlateformComponent = 2;
 
-    //plateformComponents[0] = Plateform(plateformPoints1);
-    //plateformComponents[1] = Plateform(plateformPoints2);
+    plateformComponents[0] = Plateform(plateformPoints1);
+    plateformComponents[1] = Plateform(plateformPoints2);
 
     player = Ball(28,28, QVector3D(0,10,0));
     std::cout<<"Fin creation Level"<<std::endl;
