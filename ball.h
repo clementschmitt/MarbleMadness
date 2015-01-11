@@ -9,7 +9,7 @@ class Ball : public Entity
 {
 public:
     Ball();
-    Ball(int, int);
+    Ball(int, int, QVector3D);
     float getRadius();
 
 

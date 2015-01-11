@@ -5,7 +5,7 @@ Level::Level()
     std::cout <<"Creation du level"<<std::endl;
     plateformComponents = new Plateform[1];
     nbPlateformComponent = 1;
-    player = Ball(28,28);
+    player = Ball(28,28, QVector3D(0,1,0));
     std::cout<<"Fin creation Level"<<std::endl;
 }
 
@@ -60,9 +60,8 @@ bool Level::sphereToPlane(Plateform p)
 void Level::applyGravity(QVector3D playerForce)
 {
     player.initialize();
-
     player.addForce(StaticConstant::gravity * player.getMassValue());
     player.addForce(playerForce * player.getMassValue());
 
-    player.applyForce(StaticConstant::timestep);
+    player.applyForce();
 }

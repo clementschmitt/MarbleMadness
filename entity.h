@@ -5,6 +5,8 @@
 #include <QString>
 #include <iostream>
 
+#include "StaticConstant.h"
+
 using namespace std;
 
 class Entity
@@ -29,7 +31,7 @@ public:
     void initialize();
     void translate(QVector3D);
 
-    void applyForce(int);
+    void applyForce();
     void addForce(QVector3D);
 
 protected:
