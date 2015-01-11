@@ -27,7 +27,6 @@ void GameWindow::initialize()
 {
     const qreal retinaScale = devicePixelRatio();
 
-
     glViewport(0, 0, width() * retinaScale, height() * retinaScale);
 
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -52,11 +51,14 @@ void GameWindow::render()
     glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
 
     //drawLevel();
+    glColor3f(1.0f,1.0f,1.0f);
+    glBegin(GL_POINT);
+    glVertex3f(1.0f,1.0f,1.0f);
+    glEnd();
 
     //drawBall();
-    level.applyGravity(playerForce);
-    level.collisionDetection();
-
+    /*level.applyGravity(playerForce);
+    level.collisionDetection();*/
 
     ++m_frame;
 }
