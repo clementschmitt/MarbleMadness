@@ -4,6 +4,7 @@ Level::Level()
 {
     Plateform p = Plateform();
     plateformComponents = new Plateform[1];
+    nbPlateformComponent = 1;
     plateformComponents[0] = p;
     std::cout <<"Création du level"<<std::endl;
 

@@ -27,7 +27,7 @@ int main(int argc, char **argv)
     QSurfaceFormat format;
     format.setSamples(16);
 
-    Level l;
+    Level l = Level();
 
     GameWindow window(l);
     window.setFormat(format);

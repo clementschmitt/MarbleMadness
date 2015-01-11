@@ -51,15 +51,14 @@ void GameWindow::render()
     glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
     glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
 
-    //drawLevel();
-    glColor3f(1.0f,1.0f,1.0f);
+    drawLevel();
+    /*glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_POINT);
     glVertex3f(1.0f,1.0f,1.0f);
-    glEnd();
+    glEnd();*/
     //drawBall();
     /*level.applyGravity(playerForce);
     level.collisionDetection();*/
-
 
     ++m_frame;
 }
@@ -75,7 +74,7 @@ void GameWindow::drawLevel()
 
     glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_TRIANGLES);
-    for (int i = 0; i < level.getNbPlateformComponent() - 1; i++)
+    for (int i = 0; i < level.getNbPlateformComponent(); i++)
     {
         point = level.getPlateformComponent(i).getPoint(0);
         glVertex3f(point.x(), point.y(), point.z());
@@ -92,6 +91,7 @@ void GameWindow::drawLevel()
         glVertex3f(point.x(), point.y(), point.z());
     }
     glEnd();
+    cout<<"Passage dans drawlevel"<<endl;
 }
 
 void GameWindow::drawBall()
