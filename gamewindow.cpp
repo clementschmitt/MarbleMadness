@@ -42,8 +42,8 @@ void GameWindow::initialize()
     glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 
     cam->setSS(0.4);
-    cam->setRotX(0);
-    cam->setRotY(0);
+    cam->setRotX(94);
+    cam->setRotY(-91);
     cout<<"End of Initialization"<<endl;
 }
 
@@ -55,9 +55,11 @@ void GameWindow::render()
     glLoadIdentity();
 
     glScalef(cam->getSS(), cam->getSS(),cam->getSS());
-    //glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
-    //glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
+    glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
+    glRotatef(cam->getRotY(),0.0f,1.0f,0.0f);
 
+    std::cout<<"X = "<<cam->getRotX()<<std::endl;
+    std::cout<<"Y = "<<cam->getRotY()<<std::endl;
     drawLevel();
     drawBall();
     level->applyGravity(playerForce);
