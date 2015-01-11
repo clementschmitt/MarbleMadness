@@ -21,6 +21,9 @@ public:
     int getPpf(int);
     int getNbFaces();
     int getNbPoints();
+
+    QVector3D getForce();
+    QVector3D getVelocity();
     float getMassValue();
     QVector3D getCenterPosition();
 
@@ -30,6 +33,7 @@ public:
 
     void initialize();
     void translate(QVector3D);
+    void resetVelocity();
 
     void applyForce();
     void addForce(QVector3D);
