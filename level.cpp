@@ -16,11 +16,11 @@ Level::Level()
     plateformPoints2[3] = QVector3D(1, -1.5, -2);
 
     std::cout <<"Creation du level"<<std::endl;
-    plateformComponents = new Plateform[2];
-    nbPlateformComponent = 2;
+    plateformComponents = new Plateform[1];
+    nbPlateformComponent = 1;
 
-    plateformComponents[0] = Plateform(plateformPoints1);
-    plateformComponents[1] = Plateform(plateformPoints2);
+    //plateformComponents[0] = Plateform(plateformPoints1);
+    //plateformComponents[1] = Plateform(plateformPoints2);
 
     player = Ball(28,28, QVector3D(0,1,0));
     std::cout<<"Fin creation Level"<<std::endl;
@@ -67,11 +67,15 @@ Ball Level::getPlayer(){return player;}
 bool Level::sphereToPlane(Plateform p, QVector3D* v)
 {
     QVector3D tmp = player.getCenterPosition() - p.getCenterPosition();
-    v->setX(fabs((tmp*p.getNormal()).x()));
-    v->setY(fabs((tmp*p.getNormal()).y()));
-    v->setZ(fabs((tmp*p.getNormal()).z()));
     qreal dist = QVector3D::dotProduct(tmp, p.getNormal());
+
+    v->setX((player.getRadius() - dist) * p.getNormal().x());
+    v->setY((player.getRadius() - dist) * p.getNormal().y());
+    v->setZ((player.getRadius() - dist) * p.getNormal().z());
+
     std::cout<<"Distance = "<<dist<<std::endl;
+    std::cout<<"Plateform_Normal = ("<<p.getNormal().x()<<", "<<p.getNormal().y()<<", "<<p.getNormal().z()<<")"<<std::endl;
+    std::cout<<"Plateform_Position = ("<<p.getCenterPosition().x()<<", "<<p.getCenterPosition().y()<<", "<<p.getCenterPosition().z()<<")"<<std::endl;
     std::cout<<"Ball_Position = ("<<player.getCenterPosition().x()<<", "<<player.getCenterPosition().y()<<", "<<player.getCenterPosition().z()<<")"<<std::endl;
     if(dist > player.getRadius())
         return false;
