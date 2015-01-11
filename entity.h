@@ -27,7 +27,7 @@ public:
     float getMassValue();
     QVector3D getCenterPosition();
 
-    void setCenterPosition(QVector3D);
+    void setCenterPosition();
 
     void LoadModel(QString);
 
