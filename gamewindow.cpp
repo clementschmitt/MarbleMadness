@@ -10,21 +10,24 @@ GameWindow::GameWindow()
 
 GameWindow::GameWindow(Level l)
 {
+    cout<<"Debut creation GameWindow"<<endl;
     level = l;
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(renderNow()));
     timer->start(StaticConstant::timestep * 1000.0f);
     cam = new Camera();
-    cout<<"Fin creation"<<endl;
+    cout<<"Fin creation GameWindow"<<endl;
 }
 
 GameWindow::~GameWindow()
 {
     delete timer;
+    delete cam;
 }
 
 void GameWindow::initialize()
 {
+    cout<<"Debut Initialization"<<endl;
     const qreal retinaScale = devicePixelRatio();
 
 
@@ -33,7 +36,7 @@ void GameWindow::initialize()
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+    glOrtho(-1.0, 1.0, -1.0, 1.0, -100.0, 100.0);
 
     cam->setSS(1);
     cam->setRotX(45);
@@ -53,10 +56,15 @@ void GameWindow::render()
     glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
     */
     //drawLevel();
-
-    //drawBall();
-    level.applyGravity(playerForce);
-    level.collisionDetection();
+    /*
+    glColor3f(1.0f,1.0f,1.0f);
+    glBegin(GL_POINT);
+    glVertex3f(1.0f,1.0f,1.0f);
+    glEnd();
+    */
+//drawBall();
+    /*level.applyGravity(playerForce);
+    level.collisionDetection();*/
 
 
     ++m_frame;
