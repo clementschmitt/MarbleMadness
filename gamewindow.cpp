@@ -42,8 +42,8 @@ void GameWindow::initialize()
     glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 
     cam->setSS(0.4);
-    cam->setRotX(-45);
-    cam->setRotY(-45);
+    cam->setRotX(0);
+    cam->setRotY(0);
     cout<<"End of Initialization"<<endl;
 }
 
@@ -79,7 +79,7 @@ void GameWindow::drawLevel()
 {
     QVector3D point;
 
-    glColor3f(1.0f,1.0f,1.0f);
+    glColor3f(0.0f,1.0f,1.0f);
     glBegin(GL_TRIANGLES);
     for (int i = 0; i < level->getNbPlateformComponent(); i++)
     {
