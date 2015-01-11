@@ -60,7 +60,7 @@ void GameWindow::render()
 
     drawLevel();
     drawBall();
-    level->applyGravity(playerForce);
+    //level->applyGravity(playerForce);
     //level->collisionDetection();
 
     ++m_frame;
