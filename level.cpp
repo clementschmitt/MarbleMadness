@@ -2,8 +2,8 @@
 
 Level::Level()
 {
-    Plateform p = Plateform();
-    plateformComponents[0] = p;
+    //Plateform p = Plateform();
+    plateformComponents[0] = Plateform();
     std::cout <<"Création du level"<<std::endl;
 
     player = Ball(8,8);

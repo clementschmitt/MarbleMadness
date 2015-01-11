@@ -33,7 +33,7 @@ void GameWindow::initialize()
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-1.0, 1.0, -1.0, 1.0, -100.0, 100.0);
+    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 
     cam->setSS(1);
     cam->setRotX(45);
@@ -47,10 +47,11 @@ void GameWindow::render()
     glClear(GL_COLOR_BUFFER_BIT);
 
     glLoadIdentity();
+    /*
     glScalef(cam->getSS(), cam->getSS(),cam->getSS());
     glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
     glRotatef(cam->getRotY(),0.0f,0.0f,1.0f);
-
+    */
     //drawLevel();
 
     //drawBall();
