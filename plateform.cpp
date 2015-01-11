@@ -13,6 +13,14 @@ Plateform::Plateform()
     cout <<"Fin de creation de la plateforme"<<endl;
 }
 
+Plateform::Plateform(QVector3D *pts)
+{
+    useGravity = false;
+    nbPoints = (int)points->length();
+    points = new QVector3D[nbPoints];
+    points = pts;
+}
+
 QVector3D Plateform::getNormal()
 {
     QVector3D AB = points[1] - points[0];
