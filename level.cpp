@@ -22,7 +22,7 @@ Level::Level()
     //plateformComponents[0] = Plateform(plateformPoints1);
     //plateformComponents[1] = Plateform(plateformPoints2);
 
-    player = Ball(28,28, QVector3D(0,10,0));
+    player = Ball(28,28, QVector3D(3,10,0));
     std::cout<<"Fin creation Level"<<std::endl;
 }
 
@@ -43,11 +43,9 @@ void Level::collisionDetection()
         if(sphereToPlane(p, off))
         {
             player.translate(*(off));
-            QVector3D response = 2*(QVector3D::dotProduct(-player.getForce(),p.getNormal()))*p.getNormal() + player.getForce();
-            std::cout<<"Response = ("<<response.x()<<", "<<response.y()<<", "<<response.z()<<")"<<std::endl;
-            player.resetVelocity();
-            player.addForce(response);
-            player.applyForce();
+            response = (2.2 * QVector3D::dotProduct(-player.getVelocity(),p.getNormal())) * p.getNormal() + player.getVelocity();
+            response /= StaticConstant::timestep;
+            //response = (2 * -player.getVelocity()) / StaticConstant::timestep;
         }
     }
 }
@@ -84,8 +82,15 @@ bool Level::sphereToPlane(Plateform p, QVector3D* v)
  */
 void Level::applyGravity(QVector3D playerForce)
 {
+    player.initialize();
+
     player.addForce(StaticConstant::gravity * player.getMassValue());
     player.addForce(playerForce * player.getMassValue());
+    player.addForce(response * player.getMassValue());
+
+    response.setX(0);
+    response.setY(0);
+    response.setZ(0);
 
     player.applyForce();
 }

@@ -49,7 +49,6 @@ void GameWindow::initialize()
 
 void GameWindow::render()
 {
-    cout<<"Debut de frame"<<endl;
     glClear(GL_COLOR_BUFFER_BIT);
 
     glLoadIdentity();
@@ -58,8 +57,8 @@ void GameWindow::render()
     glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
     glRotatef(cam->getRotY(),0.0f,1.0f,0.0f);
 
-    std::cout<<"X = "<<cam->getRotX()<<std::endl;
-    std::cout<<"Y = "<<cam->getRotY()<<std::endl;
+    //std::cout<<"X = "<<cam->getRotX()<<std::endl;
+    //std::cout<<"Y = "<<cam->getRotY()<<std::endl;
 
     level->applyGravity(playerForce);
     level->collisionDetection();
@@ -97,7 +96,6 @@ void GameWindow::drawLevel()
         glVertex3f(point.x(), point.y(), point.z());
     }
     glEnd();
-    cout<<"Passage dans drawlevel"<<endl;
 }
 
 void GameWindow::drawBall()

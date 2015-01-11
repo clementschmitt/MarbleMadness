@@ -23,6 +23,7 @@ protected:
     Plateform* plateformComponents;
     int nbPlateformComponent;
     Ball player;
+    QVector3D response;
 
 };
 

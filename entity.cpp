@@ -59,6 +59,8 @@ void Entity::resetVelocity(){
 
 void Entity::applyForce()
 {
+    //std::cout<<"Velocity = ("<<velocity.x()<<", "<<velocity.y()<<", "<<velocity.z()<<")"<<std::endl;
+    //std::cout<<"Force = ("<<force.x()<<", "<<force.y()<<", "<<force.z()<<")"<<std::endl;
     velocity += (force / massValue) * StaticConstant::timestep;
     translate(velocity * StaticConstant::timestep);
 }
