@@ -2,7 +2,9 @@
 
 Plateform::Plateform()
 {
-    cout <<"Création de la plateforme"<<endl;
+    nbPoints = 4;
+    points = new QVector3D[nbPoints];
+    cout <<"Creation de la plateforme"<<endl;
     points[0] = QVector3D(-3.0f, -3.0f, -3.0f);
     points[1] = QVector3D(3.0f, -3.0f, -3.0f);
     points[2] = QVector3D(3.0f, -3.0f, 3.0f);
