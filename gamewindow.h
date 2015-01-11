@@ -31,7 +31,7 @@ class GameWindow : public OpenGLWindow
 {
 public:
     GameWindow();
-    GameWindow(Level);
+    GameWindow(Level*);
 
     ~GameWindow();
 
@@ -46,7 +46,7 @@ private:
     int m_frame;
     QTimer* timer;
     Camera* cam;
-    Level level;
+    Level* level;
     QVector3D playerForce;
 };
 

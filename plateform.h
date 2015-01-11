@@ -7,7 +7,6 @@ class Plateform : public Entity
 {
 public:
     Plateform();
-    Plateform(QVector3D*);
 
     QVector3D getNormal();
 };

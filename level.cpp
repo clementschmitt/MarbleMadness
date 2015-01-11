@@ -4,7 +4,7 @@ Level::Level()
 {
     std::cout <<"Creation du level"<<std::endl;
     plateformComponents = new Plateform[1];
-    plateformComponents[0] = Plateform();
+    nbPlateformComponent = 1;
     player = Ball(8,8);
     std::cout<<"Fin creation Level"<<std::endl;
 }
