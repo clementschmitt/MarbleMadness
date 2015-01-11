@@ -41,9 +41,9 @@ void GameWindow::initialize()
     glLoadIdentity();
     glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 
-    cam->setSS(0.5);
-    cam->setRotX(45);
-    cam->setRotY(45);
+    cam->setSS(0.4);
+    cam->setRotX(-45);
+    cam->setRotY(-45);
     cout<<"End of Initialization"<<endl;
 }
 
@@ -64,8 +64,8 @@ void GameWindow::render()
     level->applyGravity(playerForce);
     level->collisionDetection();
     drawBall();
-    /*level.applyGravity(playerForce);
-    level.collisionDetection();*/
+    level->applyGravity(playerForce);
+    level->collisionDetection();
 
     ++m_frame;
 }
