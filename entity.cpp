@@ -119,6 +119,12 @@ void Entity::translate(QVector3D movement)
         points[i] += movement;
 }
 
+void Entity::reset(QVector3D pos)
+{
+    QVector3D d = pos - getCenterPosition();
+    translate(d);
+    resetVelocity();
+}
 
 void Entity::resetVelocity()
 {

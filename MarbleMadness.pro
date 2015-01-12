@@ -27,4 +27,4 @@ target.path = .
 INSTALLS += target
 
 RESOURCES += \
-    ressource.qrc
+    gestionnaire.qrc
