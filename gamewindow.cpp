@@ -128,6 +128,7 @@ void GameWindow::drawBall()
             //std::cout<<"Color red: "<< c.redF()<<std::endl;
 
             glVertex3f(p.x(), p.y(), p.z());
+            glColor3f(0.7, 0.7, 0.7);
             //glColor3f(c.red()/255, c.green()/255, c.blue()/255);
 
             //std::cout<<"Color red: "<< c.red()/255<<std::endl;
