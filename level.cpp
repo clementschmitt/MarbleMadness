@@ -24,7 +24,7 @@ Level::Level()
     pts[0] = plateformPoints1;
     pts[1] = plateformPoints2;*/
 
-    plateformComponents[0] = Plateform(plateformPoints1, 1);
+    plateformComponents[0] = Plateform(plateformPoints1, 4);
 
     player = Ball(28,28, QVector3D(0,10,0));
     std::cout<<"Fin creation Level"<<std::endl;
@@ -44,6 +44,10 @@ void Level::collisionDetection()
     for(int i = 0; i < getNbPlateformComponent(); i++)
     {
         Plateform p = getPlateformComponent(i);
+        for(int j=0; j<p.getNbPoints(); j++)
+        {
+             std::cout<<"Point n"<<j<<" = ("<<p.getPoint(i).x()<<", "<<p.getPoint(i).y()<<", "<<p.getPoint(i).z()<<")"<<std::endl;
+        }
         if(sphereToPlane(p, off))
         {
             player.translate(*(off));
@@ -70,9 +74,10 @@ bool Level::sphereToPlane(Plateform p, QVector3D* v)
 {
     QVector3D tmp = player.getCenterPosition() - p.getCenterPosition();
     qreal dist = QVector3D::dotProduct(tmp, p.getNormal());
-
+    std::cout<<"Distance with plane "<<dist<<std::endl;
     if(dist < player.getRadius())
     {
+        std::cout<<"collision with plane"<<std::endl;
         QVector3D position = player.getCenterPosition() - p.getNormal()*dist;
         if(checkInsidePolygone(p, position))
         {
@@ -165,7 +170,6 @@ float Level::distance(QVector3D v1, QVector3D v2)
  */
 void Level::applyGravity(QVector3D playerForce)
 {
-    std::cout<<player.getCenterPosition().x()<<", "<<player.getCenterPosition().y()<<", "<<player.getCenterPosition().z()<<")"<<std::endl;
     player.initialize();
 
     player.addForce(StaticConstant::gravity * player.getMassValue());
