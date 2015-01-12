@@ -6,10 +6,10 @@ Level::Level()
     QVector3D *plateformPoints1 = new QVector3D[4];
     //QVector3D *plateformPoints2 = new QVector3D[4];
 
-    plateformPoints1[0] = QVector3D(-0.5, 0, -1);
-    plateformPoints1[1] = QVector3D(-0.5, 0, 1);
-    plateformPoints1[2] = QVector3D(1.5, -1, 1);
-    plateformPoints1[3] = QVector3D(1.5, -1, -1);
+    plateformPoints1[0] = QVector3D(-1, 0, -1);
+    plateformPoints1[1] = QVector3D(-1, 0, 1);
+    plateformPoints1[2] = QVector3D(1, -1, 1);
+    plateformPoints1[3] = QVector3D(1, -1, -1);
 
     /*plateformPoints2[0] = QVector3D(-1, -1.5, -2);
     plateformPoints2[1] = QVector3D(-1, -1, -1);
@@ -85,6 +85,9 @@ bool Level::sphereToPlane(Plateform p, QVector3D* v)
         {
             if(sphereToEdge(p))
             {
+                v->setX((player.getRadius() - dist) * p.getNormal().x());
+                v->setY((player.getRadius() - dist) * p.getNormal().y());
+                v->setZ((player.getRadius() - dist) * p.getNormal().z());
                 return true;
             }
         }
@@ -162,6 +165,7 @@ float Level::distance(QVector3D v1, QVector3D v2)
  */
 void Level::applyGravity(QVector3D playerForce)
 {
+    std::cout<<player.getCenterPosition().x()<<", "<<player.getCenterPosition().y()<<", "<<player.getCenterPosition().z()<<")"<<std::endl;
     player.initialize();
 
     player.addForce(StaticConstant::gravity * player.getMassValue());
