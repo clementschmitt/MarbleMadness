@@ -7,8 +7,7 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
     points = new QVector3D[nbPoints];
     normals = new QVector3D[nbPoints];
     nbFaces = (horizontalBands * verticalBands) * 2;
-    faces = new int*[nbFaces];
-    ppf = new int[nbFaces];
+    faces = new Face[nbFaces];
 
     radius = 0.5;
     useGravity = true;
@@ -45,22 +44,38 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
             int first = horizontalNumber * (verticalBands+1) + verticalNumber;
             int second = first + verticalBands;
 
-            faces[currentFace] = new int[3];
-            ppf[currentFace] = 3;
-            faces[currentFace][0] = first;
-            faces[currentFace][1] = second;
-            faces[currentFace][2] = first + 1;
+            faces[currentFace] = Face(3);
+
+            faces[currentFace].setVertex(first, 0);
+            faces[currentFace].setVertex(second, 1);
+            faces[currentFace].setVertex(first+1, 2);
+
+            faces[currentFace].setNormal(first, 0);
+            faces[currentFace].setNormal(second, 1);
+            faces[currentFace].setNormal(first+1, 2);
+
+            faces[currentFace].setColor(QColor(0.1 , 0.1, 0.1), 0);
+            faces[currentFace].setColor(QColor(0.1, 0.1, 0.1), 1);
+            faces[currentFace].setColor(QColor(0.1, 0.1, 0.1), 2);
+
             currentFace++;
 
-            faces[currentFace] = new int[3];
-            ppf[currentFace] = 3;
-            faces[currentFace][0] = second;
-            faces[currentFace][1] = second + 1;
-            faces[currentFace][2] = first + 1;
+            faces[currentFace] = Face(3);
+            faces[currentFace].setVertex(second, 0);
+            faces[currentFace].setVertex(second+1, 1);
+            faces[currentFace].setVertex(first+1, 2);
+
+            faces[currentFace].setNormal(second, 0);
+            faces[currentFace].setNormal(second+1, 1);
+            faces[currentFace].setNormal(first+1, 2);
+
+            faces[currentFace].setColor(QColor(0.1, 0.1, 0.1), 0);
+            faces[currentFace].setColor(QColor(0.1, 0.1, 0.1), 1);
+            faces[currentFace].setColor(QColor(0.1, 0.1, 0.1), 2);
+
             currentFace++;
         }
     }
-
 }
 
 float Ball::getRadius(){return radius;}

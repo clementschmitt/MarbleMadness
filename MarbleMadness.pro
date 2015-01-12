@@ -7,7 +7,8 @@ SOURCES += $$PWD/openglwindow.cpp \
     level.cpp \
     plateform.cpp \
     staticConstant.cpp \
-    light.cpp
+    light.cpp \
+    face.cpp
 HEADERS += $$PWD/openglwindow.h \
     gamewindow.h \
     camera.h \
@@ -16,7 +17,8 @@ HEADERS += $$PWD/openglwindow.h \
     level.h \
     plateform.h \
     staticConstant.h \
-    light.h
+    light.h \
+    face.h
 
 SOURCES += \
     main.cpp

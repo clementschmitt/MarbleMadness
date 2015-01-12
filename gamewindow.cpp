@@ -40,7 +40,10 @@ void GameWindow::initialize()
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
-
+    //glEnable(GL_LIGHTING);
+    //glEnable(GL_LIGHT0);
+    //glEnable(GL_LIGHT1);
+    //glEnable(GL_NORMALIZE);
     cam->setSS(0.1);
     cam->setRotX(30);
     cam->setRotY(30);
@@ -76,7 +79,6 @@ void GameWindow::render()
 void GameWindow::drawLevel()
 {
     QVector3D point;
-
     glColor3f(0.0f,1.0f,1.0f);
     glBegin(GL_TRIANGLES);
     for (int i = 0; i < level->getNbPlateformComponent(); i++)
@@ -107,11 +109,13 @@ void GameWindow::drawBall()
 
     for(int i = 0; i < player.getNbFaces(); i++)
     {
-        for(int j = 0; j < player.getPpf(i); j++)
+        Face f = player.getFace(i);
+        for(int j = 0; j < f.getNbPoints(); j++)
         {
-            glVertex3f(player.getPoint(player.getFaces(i)[j]).x(),
-                       player.getPoint(player.getFaces(i)[j]).y(),
-                       player.getPoint(player.getFaces(i)[j]).z());
+            QVector3D p = player.getPoint(f.getVertex(j));
+            glVertex3f(p.x(),
+                       p.y(),
+                       p.z());
         }
     }
     glEnd();
