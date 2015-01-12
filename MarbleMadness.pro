@@ -25,3 +25,6 @@ SOURCES += \
 
 target.path = .
 INSTALLS += target
+
+RESOURCES += \
+    ressource.qrc
