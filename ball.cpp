@@ -53,9 +53,9 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
             faces[currentFace].setNormal(second, 1);
             faces[currentFace].setNormal(first+1, 2);
 
-            faces[currentFace].setColor(QColor(0.1 , 0.1, 0.1), 0);
-            faces[currentFace].setColor(QColor(0.1, 0.1, 0.1), 1);
-            faces[currentFace].setColor(QColor(0.1, 0.1, 0.1), 2);
+            faces[currentFace].setColor(QColor(180, 180, 180), 0);
+            faces[currentFace].setColor(QColor(180, 180, 180), 1);
+            faces[currentFace].setColor(QColor(180, 180, 180), 2);
 
             currentFace++;
 
@@ -68,9 +68,9 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
             faces[currentFace].setNormal(second+1, 1);
             faces[currentFace].setNormal(first+1, 2);
 
-            faces[currentFace].setColor(QColor(0.1, 0.1, 0.1), 0);
-            faces[currentFace].setColor(QColor(0.1, 0.1, 0.1), 1);
-            faces[currentFace].setColor(QColor(0.1, 0.1, 0.1), 2);
+            faces[currentFace].setColor(QColor(180, 180, 180), 0);
+            faces[currentFace].setColor(QColor(180, 180, 180), 1);
+            faces[currentFace].setColor(QColor(180, 180, 180), 2);
 
             currentFace++;
         }

@@ -55,11 +55,20 @@ void Level::collisionDetection()
     for(int i = 0; i < getNbPlateformComponent(); i++)
     {
         Plateform p = getPlateformComponent(i);
+        for(int j=0; j<p.getNbPoints(); j++)
+        {
+             //std::cout<<"Point n"<<j<<" = ("<<p.getPoint(i).x()<<", "<<p.getPoint(i).y()<<", "<<p.getPoint(i).z()<<")"<<std::endl;
+        }
         if(sphereToPlane(p, col, off))
         {
             QVector3D colNorm = (player.getCenterPosition() - *col);
             colNorm.normalize();
             player.translate(*(off));
+            //reponse = (2 * QVector3D::dotProduct(-player.getVelocity(),p.getNormal())) * p.getNormal() + player.getVelocity();
+            //reponse /= StaticConstant::timestep;
+            //response = (2 * -player.getVelocity()) / StaticConstant::timestep;
+            //std::cout<<"Reponse force = ("<<reponse.x()<<", "<<reponse.y()<<", "<<reponse.z()<<")"<<std::endl;
+
             float j = -(0.5)* QVector3D::dotProduct((player.getMassValue()*player.getVelocity()), colNorm);
             QVector3D bounce = (j * colNorm);
             QVector3D friction = (0.99) * (projectionPointPlane(player.getCenterPosition()+player.getVelocity(), p) - *col);
@@ -93,6 +102,8 @@ bool Level::sphereToPlane(Plateform p, QVector3D* c, QVector3D* v)
     qreal dist = QVector3D::dotProduct(tmp, p.getNormal());
     if(dist < player.getRadius())
     {
+        QVector3D position = player.getCenterPosition() - p.getNormal()*dist;
+        if(checkInsidePolygone(p, position))
         *c = player.getCenterPosition() - p.getNormal()*dist;
         if(checkInsidePolygone(p, *c))
         {
@@ -206,4 +217,66 @@ void Level::applyGravity(QVector3D playerForce)
     reponse.setZ(0);
 
     player.applyForce();
+}
+/*********************************************GESTION DE LA LUMIERE****************************************************/
+/**
+ * @brief Entity::initLighting
+ * @param ambiant
+ */
+void Level::initLighting(QColor ambiant)
+{
+    // Init pour le player
+    for (int i =0; i < player.getNbFaces(); i++)
+    {
+        for (int j = 0; j < player.getFace(i).getNbPoints(); j++)
+        {
+            player.getFace(i).setColor(ambiant, j);
+            std::cout<<"Init Color red: "<< player.getFace(i).getColor(j).red()<<std::endl;
+        }
+
+    }
+
+    // Init pour les plateformes
+    /*for (int i =0; i < nbPlateformComponent; i++)
+    {
+        for(int j = 0; j < plateformComponents[i].getFace().getNbPoints(); j++)
+            plateformComponents[i].getFace().setColor(ambiant, j);
+    }*/
+    std::cout<<"Init Lighting"<<std::endl;
+}
+
+void Level::addLight(Light light)
+{
+    QColor c;
+
+    for (int i = 0; i < player.getNbFaces(); i++)
+    {
+        for (int j = 0; j < player.getFace(i).getNbPoints(); j++)
+        {
+            std::cout<<"before compute Color red: "<< player.getFace(i).getColor(j).red()<<std::endl;
+            c = light.computeLighting(player.getPoint(player.getFace(i).getVertexIndex(j)),
+                                      player.getNormal(player.getFace(i).getNormalIndex(j)));
+
+            player.getFace(i).getColor(j).setRed(player.getFace(i).getColor(j).red() + c.red());
+            player.getFace(i).getColor(j).setGreen(player.getFace(i).getColor(j).green()+ c.green());
+            player.getFace(i).getColor(j).setBlue(player.getFace(i).getColor(j).blue() + c.blue());
+            std::cout<<"after compute Color red: "<< player.getFace(i).getColor(j).red()<<std::endl;
+        }
+    }
+
+    /*for (int i =0; i < nbPlateformComponent; i++)
+    {
+        for (int j = 0; j < plateformComponents[i].getFace().getNbPoints(); j++)
+        {
+            c = light.computeLighting(plateformComponents[i].getPoint(plateformComponents[i].getFace().getVertexIndex(j)),
+                    plateformComponents[i].getNormal());
+
+            plateformComponents[i].getFace().getColor(j).setRed(plateformComponents[i].getFace().getColor(j).red() + c.red());
+            plateformComponents[i].getFace().getColor(j).setGreen(plateformComponents[i].getFace().getColor(j).green() + c.green());
+            plateformComponents[i].getFace().getColor(j).setBlue(plateformComponents[i].getFace().getColor(j).blue() + c.blue());
+        }
+    }*/
+
+    std::cout<<"ADD Light"<<std::endl;
+
 }

@@ -7,7 +7,8 @@
 #include "entity.h"
 #include "plateform.h"
 #include "ball.h"
-#include "StaticConstant.h"
+#include "staticConstant.h"
+#include "light.h"
 
 class Level
 {
@@ -27,6 +28,9 @@ public:
     QVector3D closestPointOnLine(QVector3D, QVector3D, QVector3D);
     float angleBetweenVectors(QVector3D, QVector3D);
     float distance(QVector3D, QVector3D);
+
+    void initLighting(QColor);
+    void addLight(Light);
 
 protected:
     Plateform* plateformComponents;

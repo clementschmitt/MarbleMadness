@@ -23,9 +23,6 @@ public:
     QVector3D getPoint(int);
     QVector3D getNormal(int);
 
-    QVector3D* getPoints();
-    QVector3D* getNormals();
-
     QVector3D getForce();
     QVector3D getVelocity();
     float getMassValue();
