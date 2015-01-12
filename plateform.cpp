@@ -10,7 +10,7 @@ Plateform::Plateform()
     points[1] = QVector3D(-1, -1, 1);
     points[2] = QVector3D(1, -1, 1);
     points[3] = QVector3D(1, -1, -1);
-
+    setCenterPosition();
     centerPosition = QVector3D(0,-1,0);
     cout <<"Fin de creation de la plateforme"<<endl;
 }
@@ -18,11 +18,10 @@ Plateform::Plateform()
 Plateform::Plateform(QVector3D *pts)
 {
     useGravity = false;
-    nbPoints = (int)points->length();
-    points = new QVector3D[nbPoints];
+    nbPoints = 4;
     normals = new QVector3D[nbPoints];
-
     points = pts;
+    setCenterPosition();
     for(int i = 0; i < nbPoints; i++)
         normals[i] = getNormal();
 }

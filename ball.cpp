@@ -32,7 +32,6 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
             float z = sinPhi * sinTheta;
 
             normals[horizontalNumber * (verticalBands+1) + verticalNumber] = QVector3D(x, y, z);
-
             points[horizontalNumber * (verticalBands+1) + verticalNumber] = QVector3D(radius * x + center.x(), radius * y + center.y(), radius * z + center.z());
         }
     }

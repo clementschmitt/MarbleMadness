@@ -59,7 +59,6 @@ void GameWindow::render()
 
     //std::cout<<"X = "<<cam->getRotX()<<std::endl;
     //std::cout<<"Y = "<<cam->getRotY()<<std::endl;
-
     level->applyGravity(playerForce);
     level->collisionDetection();
     drawLevel();
@@ -134,17 +133,17 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
 {
     switch(event->key())
     {
-    case Qt::UpArrow :
-        playerForce.setY(playerForce.y()+10);
+    case Qt::Key_Up :
+        playerForce.setZ(playerForce.z()+0.1);
         break;
-    case Qt::DownArrow :
-        playerForce.setY(playerForce.y()-10);
+    case Qt::Key_Down :
+        playerForce.setZ(playerForce.z()-0.1);
         break;
-    case Qt::LeftArrow :
-        playerForce.setX(playerForce.x()+10);
+    case Qt::Key_Left :
+        playerForce.setX(playerForce.x()+0.1);
         break;
-    case Qt::RightArrow :
-        playerForce.setX(playerForce.x()-10);
+    case Qt::Key_Right :
+        playerForce.setX(playerForce.x()-0.1);
         break;
     case 'A':
         cam->setRotX(cam->getRotX()+1.0f);
