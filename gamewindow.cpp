@@ -14,6 +14,7 @@ GameWindow::GameWindow(Level* l)
 {
     cout<<"Debut creation GameWindow"<<endl;
     level = l;
+    light = Light(1000.0f, QColor(200 , 200, 200), QVector3D(10.0, 10.0, 10.0));
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(renderNow()));
     timer->start(StaticConstant::timestep * 1000.0f);
@@ -39,11 +40,12 @@ void GameWindow::initialize()
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
-    //glEnable(GL_LIGHTING);
-    //glEnable(GL_LIGHT0);
-    //glEnable(GL_LIGHT1);
-    //glEnable(GL_NORMALIZE);
+    glOrtho(-10.0, 50.0, -10.0, 10.0, -10.0, 10.0);
+
+    //level->initLighting(QColor(200 , 200, 200));
+    //level->addLight(light);
+    //level->addLight(light);
+
     cam->setSS(0.1);
     cam->setRotX(30);
     cam->setRotY(30);
@@ -102,19 +104,31 @@ void GameWindow::drawLevel()
 void GameWindow::drawBall()
 {
     Ball player = level->getPlayer();
+    QVector3D p, n;
+    QColor c;
+    Face f;
 
-    glColor3f(1.0f,1.0f,1.0f);
+    //glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_TRIANGLES);
 
     for(int i = 0; i < player.getNbFaces(); i++)
     {
-        Face f = player.getFace(i);
+        f = player.getFace(i);
         for(int j = 0; j < f.getNbPoints(); j++)
         {
-            QVector3D p = player.getPoint(f.getVertex(j));
-            glVertex3f(p.x(),
-                       p.y(),
-                       p.z());
+            p = player.getPoint(f.getVertexIndex(j));
+            n = player.getNormal(f.getNormalIndex(j));
+            c = f.getColor(j);
+            //light.computeLighting(p, n);
+
+            //std::cout<<"Color red: "<< c.redF()<<std::endl;
+
+            glVertex3f(p.x(), p.y(), p.z());
+            //glColor3f(c.red()/255, c.green()/255, c.blue()/255);
+
+            //std::cout<<"Color red: "<< c.red()/255<<std::endl;
+            //std::cout<<"Color green: "<< c.green() <<std::endl;
+            //std::cout<<"Color blue: "<< c.blue() <<std::endl;
         }
     }
     glEnd();

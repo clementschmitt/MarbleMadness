@@ -21,10 +21,6 @@ QVector3D Entity::getPoint(int index){return points[index];}
 
 QVector3D Entity::getNormal(int index){return normals[index];}
 
-QVector3D* Entity::getPoints(){return points;}
-
-QVector3D* Entity::getNormals(){return normals;}
-
 QVector3D Entity::getForce(){return force;}
 
 QVector3D Entity::getVelocity(){return velocity;}
@@ -80,16 +76,3 @@ void Entity::applyForce()
 }
 
 void Entity::addForce(QVector3D f){force += f;}
-
-/*void Entity::initLighting(QColor ambiant)
-{
-    for (int i =0; i < nbFaces; i++)
-    {
-      //  faces[i].
-    }
-}
-
-void Entity::addLight(Light l)
-{
-
-}*/

@@ -47,6 +47,7 @@ private:
     QTimer* timer;
     Camera* cam;
     Level* level;
+    Light light;
     QVector3D playerForce;
 };
 

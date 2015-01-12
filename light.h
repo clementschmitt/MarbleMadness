@@ -10,6 +10,7 @@ class Light
 {
 public:
     Light();
+    Light(float, QColor, QVector3D);
     ~Light();
 
     float getRadius();

@@ -9,24 +9,16 @@ Face::Face(int size)
     vertexIndex = new int[size];
     normalIndex = new int[size];
     colors = new QColor[size];
-
     nbPoints = size;
 }
 
 int Face::getNbPoints(){return nbPoints;}
 
-int Face::getVertex(int i){return vertexIndex[i];}
+int Face::getVertexIndex(int i){return vertexIndex[i];}
 
-int Face::getNormal(int i){return normalIndex[i];}
+int Face::getNormalIndex(int i){return normalIndex[i];}
 
 QColor Face::getColor(int i){return colors[i];}
-
-
-int* Face::getVertexIndex(){return vertexIndex;}
-
-int* Face::getNormalIndex(){return normalIndex;}
-
-QColor* Face::getColors(){return colors;}
 
 
 void Face::setVertexIndex(int *verIn){vertexIndex = verIn;}

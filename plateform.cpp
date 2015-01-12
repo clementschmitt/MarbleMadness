@@ -25,6 +25,8 @@ Plateform::Plateform(QVector3D *pts, int nbPts)
     setCenterPosition();
 }
 
+Face Plateform::getFace(){return face;}
+
 QVector3D Plateform::getNormal()
 {
     QVector3D normal = QVector3D::normal(points[0],points[1],points[2]);
