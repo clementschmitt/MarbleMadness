@@ -15,15 +15,14 @@ Plateform::Plateform()
     cout <<"Fin de creation de la plateforme"<<endl;
 }
 
-Plateform::Plateform(QVector3D *pts)
+Plateform::Plateform(QVector3D *pts, int nbPts)
 {
     useGravity = false;
-    nbPoints = 4;
-    normals = new QVector3D[nbPoints];
+    nbFaces = 1;
+    nbPoints = nbPts;
+    face = Face(nbFaces);
     points = pts;
     setCenterPosition();
-    for(int i = 0; i < nbPoints; i++)
-        normals[i] = getNormal();
 }
 
 QVector3D Plateform::getNormal()

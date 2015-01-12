@@ -5,7 +5,8 @@
 #include <QString>
 #include <iostream>
 
-#include "StaticConstant.h"
+#include "staticConstant.h"
+#include "face.h"
 
 using namespace std;
 
@@ -15,12 +16,15 @@ public:
     Entity();
     Entity(QString); //Récupère les données d'un modèle 3D avec son localPath
 
-
-    QVector3D getPoint(int);
-    int* getFaces(int);
-    int getPpf(int);
+    Face getFace(int);
     int getNbFaces();
     int getNbPoints();
+
+    QVector3D getPoint(int);
+    QVector3D getNormal(int);
+
+    QVector3D* getPoints();
+    QVector3D* getNormals();
 
     QVector3D getForce();
     QVector3D getVelocity();
@@ -39,12 +43,12 @@ public:
     void addForce(QVector3D);
 
 protected:
-    QVector3D *points; // ensemble des points de notre objet
-    QVector3D *normals;
-    int** faces; //ensemble des faces de notre objet
-    int* ppf; //nombre points par face (ppf)
+    Face* faces; //ensemble des faces de notre objet
     int nbFaces; //nombre de face dans notre objet
-    int nbPoints; //nombre de points dans notre objet
+    int nbPoints;
+
+    QVector3D *points; //ensemble des points de notre entité
+    QVector3D *normals; //sensemble des normales des sommets
 
     QVector3D centerPosition; // position du modèle 3D dans la scène
     QVector3D force; // total des forces appliqués à notre entité

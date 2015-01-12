@@ -11,19 +11,23 @@ Entity::Entity(QString s)
 {
 }
 
-QVector3D Entity::getPoint(int i){return points[i];}
-
-int* Entity::getFaces(int i){return faces[i];}
-
-int Entity::getPpf(int i){return ppf[i];}
+Face Entity::getFace(int index){return faces[index];}
 
 int Entity::getNbFaces(){return nbFaces;}
+
+int Entity::getNbPoints(){return nbPoints;}
+
+QVector3D Entity::getPoint(int index){return points[index];}
+
+QVector3D Entity::getNormal(int index){return normals[index];}
+
+QVector3D* Entity::getPoints(){return points;}
+
+QVector3D* Entity::getNormals(){return normals;}
 
 QVector3D Entity::getForce(){return force;}
 
 QVector3D Entity::getVelocity(){return velocity;}
-
-int Entity::getNbPoints(){return nbPoints;}
 
 float Entity::getMassValue(){return massValue;}
 
@@ -60,7 +64,8 @@ void Entity::translate(QVector3D movement)
 }
 
 
-void Entity::resetVelocity(){
+void Entity::resetVelocity()
+{
     velocity.setX(0);
     velocity.setY(0);
     velocity.setZ(0);
@@ -74,8 +79,17 @@ void Entity::applyForce()
     translate(velocity * StaticConstant::timestep);
 }
 
-void Entity::addForce(QVector3D f)
+void Entity::addForce(QVector3D f){force += f;}
+
+/*void Entity::initLighting(QColor ambiant)
 {
-    force += f;
+    for (int i =0; i < nbFaces; i++)
+    {
+      //  faces[i].
+    }
 }
 
+void Entity::addLight(Light l)
+{
+
+}*/
