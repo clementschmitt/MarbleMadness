@@ -37,6 +37,7 @@ public:
 
     void initialize();
     void translate(QVector3D);
+    void reset(QVector3D);
     void resetVelocity();
 
     void applyForce();

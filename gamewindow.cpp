@@ -39,7 +39,7 @@ void GameWindow::initialize()
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
+    //glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
     //glEnable(GL_LIGHTING);
     //glEnable(GL_LIGHT0);
     //glEnable(GL_LIGHT1);
@@ -53,23 +53,24 @@ void GameWindow::initialize()
 void GameWindow::render()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-
-    glLoadIdentity();
-
-    glScalef(cam->getSS(), cam->getSS(),cam->getSS());
+    glLoadIdentity();glScalef(cam->getSS(), cam->getSS(),cam->getSS());
     glRotatef(cam->getRotX(),1.0f,0.0f,0.0f);
     glRotatef(cam->getRotY(),0.0f,1.0f,0.0f);
+    glTranslatef(-cam->getPos().x(), -cam->getPos().y(), -cam->getPos().z());
 
     //std::cout<<"X = "<<cam->getRotX()<<std::endl;
     //std::cout<<"Y = "<<cam->getRotY()<<std::endl;
+    QVector3D oldPos = level->getPlayer().getCenterPosition();
     level->applyGravity(playerForce);
     level->collisionDetection();
+    QVector3D newPos = level->getPlayer().getCenterPosition();
     drawLevel();
     drawBall();
 
     playerForce.setX(0);
     playerForce.setY(0);
     playerForce.setZ(0);
+    cam->setPos(cam->getPos() + newPos - oldPos);
     ++m_frame;
 }
 
@@ -141,10 +142,10 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
     switch(event->key())
     {
     case Qt::Key_Up :
-        playerForce.setZ(playerForce.z()+10);
+        playerForce.setZ(playerForce.z()-10);
         break;
     case Qt::Key_Down :
-        playerForce.setZ(playerForce.z()-10);
+        playerForce.setZ(playerForce.z()+10);
         break;
     case Qt::Key_Left :
         playerForce.setX(playerForce.x()-10);

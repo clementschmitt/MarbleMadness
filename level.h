@@ -30,8 +30,10 @@ public:
 
 protected:
     Plateform* plateformComponents;
+    Plateform limit;
     int nbPlateformComponent;
     Ball player;
+    QVector3D begin;
     QVector3D reponse;
 
 };

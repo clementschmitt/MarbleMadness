@@ -5,6 +5,7 @@ Level::Level()
     //QVector3D *pts;
     QVector3D *plateformPoints1 = new QVector3D[4];
     QVector3D *plateformPoints2 = new QVector3D[4];
+    QVector3D *plateformLimit = new QVector3D[4];
 
     plateformPoints1[0] = QVector3D(-1, -0.5, -1);
     plateformPoints1[1] = QVector3D(-1, -0.5, 1);
@@ -16,6 +17,11 @@ Level::Level()
     plateformPoints2[2] = QVector3D(20, -1, 1);
     plateformPoints2[3] = QVector3D(20, -1, -1);
 
+    plateformLimit[0] = QVector3D(-50, -5, -50);
+    plateformLimit[1] = QVector3D(-50, -5, 50);
+    plateformLimit[2] = QVector3D(50, -5, 50);
+    plateformLimit[3] = QVector3D(50, -5, -50);
+
     std::cout <<"Creation du level"<<std::endl;
     plateformComponents = new Plateform[2];
     nbPlateformComponent = 2;
@@ -25,10 +31,11 @@ Level::Level()
     pts[1] = plateformPoints2;*/
 
     plateformComponents[0] = Plateform(plateformPoints1, 4);
-
     plateformComponents[1] = Plateform(plateformPoints2, 4);
+    limit = Plateform(plateformLimit, 4);
 
-    player = Ball(28,28, QVector3D(0,2,0));
+    begin = QVector3D(0,2,0);
+    player = Ball(28,28, begin);
     std::cout<<"Fin creation Level"<<std::endl;
 }
 
@@ -44,6 +51,7 @@ void Level::collisionDetection()
 {
     QVector3D* off = new QVector3D();
     QVector3D* col = new QVector3D();
+
     for(int i = 0; i < getNbPlateformComponent(); i++)
     {
         Plateform p = getPlateformComponent(i);
@@ -55,11 +63,12 @@ void Level::collisionDetection()
             float j = -(0.5)* QVector3D::dotProduct((player.getMassValue()*player.getVelocity()), colNorm);
             QVector3D bounce = (j * colNorm);
             QVector3D friction = (0.99) * (projectionPointPlane(player.getCenterPosition()+player.getVelocity(), p) - *col);
-
-            std::cout<<"("<<friction.x()<<", "<<friction.y()<<", "<<friction.z()<<")"<<std::endl;
             reponse = bounce + friction;
         }
     }
+
+    if(sphereToPlane(limit, col, off)){player.reset(begin);}
+
     if(!reponse.isNull())
     {
         player.resetVelocity();

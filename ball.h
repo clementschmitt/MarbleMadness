@@ -12,7 +12,6 @@ public:
     Ball(int, int, QVector3D);
     float getRadius();
 
-
 protected:
     float radius;
 
