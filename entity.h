@@ -4,6 +4,9 @@
 #include <QVector3D>
 #include <QString>
 #include <iostream>
+#include <QFile>
+#include <QFileInfo>
+#include <QTextStream>
 
 #include "staticConstant.h"
 #include "face.h"
@@ -14,7 +17,7 @@ class Entity
 {
 public:
     Entity();
-    Entity(QString); //Récupère les données d'un modèle 3D avec son localPath
+    Entity(const QString); //Récupère les données d'un modèle 3D avec son localPath
 
     Face getFace(int);
     int getNbFaces();
@@ -41,6 +44,7 @@ public:
     void addForce(QVector3D);
 
 protected:
+
     Face* faces; //ensemble des faces de notre objet
     int nbFaces; //nombre de face dans notre objet
     int nbPoints;
@@ -55,6 +59,9 @@ protected:
     float massValue;
 
     bool useGravity;
+
+private:
+    //QFile file;
 };
 
 #endif // ENTITY_H
