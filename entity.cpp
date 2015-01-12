@@ -33,7 +33,16 @@ float Entity::getMassValue(){return massValue;}
 
 QVector3D Entity::getCenterPosition(){return centerPosition;}
 
-void Entity::setCenterPosition(QVector3D position){centerPosition = position;}
+void Entity::setCenterPosition()
+{
+    float weight = 1.0 / nbPoints;
+    QVector3D center;
+    for(int i = 0; i < nbPoints; i++)
+    {
+        center += weight * points[i];
+    }
+    centerPosition = center;
+}
 
 void Entity::LoadModel(QString s)
 {
