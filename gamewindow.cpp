@@ -67,6 +67,9 @@ void GameWindow::render()
     drawLevel();
     drawBall();
 
+    playerForce.setX(0);
+    playerForce.setY(0);
+    playerForce.setZ(0);
     ++m_frame;
 }
 
@@ -138,16 +141,16 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
     switch(event->key())
     {
     case Qt::Key_Up :
-        playerForce.setZ(playerForce.z()+0.1);
+        playerForce.setZ(playerForce.z()+10);
         break;
     case Qt::Key_Down :
-        playerForce.setZ(playerForce.z()-0.1);
+        playerForce.setZ(playerForce.z()-10);
         break;
     case Qt::Key_Left :
-        playerForce.setX(playerForce.x()+0.1);
+        playerForce.setX(playerForce.x()-10);
         break;
     case Qt::Key_Right :
-        playerForce.setX(playerForce.x()-0.1);
+        playerForce.setX(playerForce.x()+10);
         break;
     case 'A':
         cam->setRotX(cam->getRotX()+1.0f);

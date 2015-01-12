@@ -4,21 +4,21 @@ Level::Level()
 {
     //QVector3D *pts;
     QVector3D *plateformPoints1 = new QVector3D[4];
-    //QVector3D *plateformPoints2 = new QVector3D[4];
+    QVector3D *plateformPoints2 = new QVector3D[4];
 
-    plateformPoints1[0] = QVector3D(-1, 0, -1);
-    plateformPoints1[1] = QVector3D(-1, 0, 1);
+    plateformPoints1[0] = QVector3D(-1, -0.5, -1);
+    plateformPoints1[1] = QVector3D(-1, -0.5, 1);
     plateformPoints1[2] = QVector3D(1, -1, 1);
     plateformPoints1[3] = QVector3D(1, -1, -1);
 
-    /*plateformPoints2[0] = QVector3D(-1, -1.5, -2);
-    plateformPoints2[1] = QVector3D(-1, -1, -1);
-    plateformPoints2[2] = QVector3D(1, -1, -1);
-    plateformPoints2[3] = QVector3D(1, -1.5, -2);*/
+    plateformPoints2[0] = QVector3D(1, -1, -1);
+    plateformPoints2[1] = QVector3D(1, -1, 1);
+    plateformPoints2[2] = QVector3D(20, -1, 1);
+    plateformPoints2[3] = QVector3D(20, -1, -1);
 
     std::cout <<"Creation du level"<<std::endl;
-    plateformComponents = new Plateform[1];
-    nbPlateformComponent = 1;
+    plateformComponents = new Plateform[2];
+    nbPlateformComponent = 2;
 
     /*pts = new QVector3D[1];
     pts[0] = plateformPoints1;
@@ -26,7 +26,9 @@ Level::Level()
 
     plateformComponents[0] = Plateform(plateformPoints1, 4);
 
-    player = Ball(28,28, QVector3D(0,10,0));
+    plateformComponents[1] = Plateform(plateformPoints2, 4);
+
+    player = Ball(28,28, QVector3D(0,2,0));
     std::cout<<"Fin creation Level"<<std::endl;
 }
 
@@ -41,21 +43,27 @@ Plateform Level::getPlateformComponent(int index){return plateformComponents[ind
 void Level::collisionDetection()
 {
     QVector3D* off = new QVector3D();
+    QVector3D* col = new QVector3D();
     for(int i = 0; i < getNbPlateformComponent(); i++)
     {
         Plateform p = getPlateformComponent(i);
-        for(int j=0; j<p.getNbPoints(); j++)
+        if(sphereToPlane(p, col, off))
         {
-             std::cout<<"Point n"<<j<<" = ("<<p.getPoint(i).x()<<", "<<p.getPoint(i).y()<<", "<<p.getPoint(i).z()<<")"<<std::endl;
-        }
-        if(sphereToPlane(p, off))
-        {
+            QVector3D colNorm = (player.getCenterPosition() - *col);
+            colNorm.normalize();
             player.translate(*(off));
-            //reponse = (2 * QVector3D::dotProduct(-player.getVelocity(),p.getNormal())) * p.getNormal() + player.getVelocity();
-            //reponse /= StaticConstant::timestep;
-            //response = (2 * -player.getVelocity()) / StaticConstant::timestep;
-            std::cout<<"Reponse force = ("<<reponse.x()<<", "<<reponse.y()<<", "<<reponse.z()<<")"<<std::endl;
+            float j = -(0.5)* QVector3D::dotProduct((player.getMassValue()*player.getVelocity()), colNorm);
+            QVector3D bounce = (j * colNorm);
+            QVector3D friction = (0.99) * (projectionPointPlane(player.getCenterPosition()+player.getVelocity(), p) - *col);
+
+            std::cout<<"("<<friction.x()<<", "<<friction.y()<<", "<<friction.z()<<")"<<std::endl;
+            reponse = bounce + friction;
         }
+    }
+    if(!reponse.isNull())
+    {
+        player.resetVelocity();
+        reponse /= StaticConstant::timestep;
     }
 }
 
@@ -70,16 +78,14 @@ Ball Level::getPlayer(){return player;}
  * @param p
  * @return True if collision between the ball and plateform p
  */
-bool Level::sphereToPlane(Plateform p, QVector3D* v)
+bool Level::sphereToPlane(Plateform p, QVector3D* c, QVector3D* v)
 {
     QVector3D tmp = player.getCenterPosition() - p.getCenterPosition();
     qreal dist = QVector3D::dotProduct(tmp, p.getNormal());
-    std::cout<<"Distance with plane "<<dist<<std::endl;
     if(dist < player.getRadius())
     {
-        std::cout<<"collision with plane"<<std::endl;
-        QVector3D position = player.getCenterPosition() - p.getNormal()*dist;
-        if(checkInsidePolygone(p, position))
+        *c = player.getCenterPosition() - p.getNormal()*dist;
+        if(checkInsidePolygone(p, *c))
         {
             v->setX((player.getRadius() - dist) * p.getNormal().x());
             v->setY((player.getRadius() - dist) * p.getNormal().y());
@@ -88,7 +94,7 @@ bool Level::sphereToPlane(Plateform p, QVector3D* v)
         }
         else
         {
-            if(sphereToEdge(p))
+            if(sphereToEdge(p, c))
             {
                 v->setX((player.getRadius() - dist) * p.getNormal().x());
                 v->setY((player.getRadius() - dist) * p.getNormal().y());
@@ -100,7 +106,7 @@ bool Level::sphereToPlane(Plateform p, QVector3D* v)
     return false;
 }
 
-bool Level::sphereToEdge(Plateform p)
+bool Level::sphereToEdge(Plateform p, QVector3D* c)
 {
     QVector3D point;
 
@@ -109,7 +115,10 @@ bool Level::sphereToEdge(Plateform p)
         point = closestPointOnLine(p.getPoint(i), p.getPoint((i + 1) % p.getNbPoints()), player.getCenterPosition());
 
         if(distance(point, player.getCenterPosition()) < player.getRadius())
+        {
+            *c = point;
             return true;
+        }
     }
     return false;
 }
@@ -162,6 +171,13 @@ float Level::distance(QVector3D v1, QVector3D v2)
     return sqrt( (v2.x() - v1.x()) * (v2.x() - v1.x()) +
                  (v2.y() - v1.y()) * (v2.y() - v1.y()) +
                  (v2.z() - v1.z()) * (v2.z() - v1.z()) );
+}
+
+QVector3D Level::projectionPointPlane(QVector3D point, Plateform p)
+{
+    QVector3D tmp = point - p.getCenterPosition();
+    qreal dist = QVector3D::dotProduct(tmp, p.getNormal());
+    return point - p.getNormal()*dist;
 }
 
 /**
