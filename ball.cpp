@@ -14,6 +14,7 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
     massValue = 1;
     centerPosition = center;
 
+
     for (int horizontalNumber = 0; horizontalNumber < horizontalBands+1; horizontalNumber++)
     {
         float theta = horizontalNumber * M_PI / horizontalBands;
@@ -79,3 +80,18 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
 }
 
 float Ball::getRadius(){return radius;}
+
+
+void Ball::applyRotation()
+{
+    for(int i=0; i<getNbPoints(); i++)
+    {
+        points[i].setX(points[i].x()*rotation.row(0).x() + points[i].y()*rotation.row(0).y() + points[i].z()*rotation.row(0).z());
+        points[i].setY(points[i].x()*rotation.row(1).x() + points[i].y()*rotation.row(1).y() + points[i].z()*rotation.row(1).z());
+        points[i].setZ(points[i].x()*rotation.row(2).x() + points[i].y()*rotation.row(2).y() + points[i].z()*rotation.row(2).z());
+    }
+    centerPosition.setX(centerPosition.x()*rotation.row(0).x() + centerPosition.y()*rotation.row(0).y() + centerPosition.z()*rotation.row(0).z());
+    centerPosition.setY(centerPosition.x()*rotation.row(1).x() + centerPosition.y()*rotation.row(1).y() + centerPosition.z()*rotation.row(1).z());
+    centerPosition.setZ(centerPosition.x()*rotation.row(2).x() + centerPosition.y()*rotation.row(2).y() + centerPosition.z()*rotation.row(2).z());
+
+}

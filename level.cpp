@@ -59,6 +59,13 @@ void Level::collisionDetection()
             float j = -(0.3)* QVector3D::dotProduct((player.getMassValue()*player.getVelocity()), colNorm);
             QVector3D bounce = (j * colNorm);
             QVector3D friction = (0.99) * (projectionPointPlane(player.getCenterPosition()+player.getVelocity(), face) - *col);
+            std::cout<<"("<<friction.x()<<", "<<friction.y()<<", "<<friction.z()<<")"<<std::endl;
+            std::cout<<friction.x()*M_PI/180<<std::endl;
+            QMatrix4x4 rot;
+            /*rot.rotate(friction.x()*M_PI/180, 0, 0, 1);
+            rot.rotate(friction.z()*M_PI/180, 0, 0, 1);
+            player.rotation *= rot;
+            player.applyRotation();*/
             reponse = bounce + friction;
         }
     }
