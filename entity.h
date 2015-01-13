@@ -31,6 +31,7 @@ public:
     QVector3D getVelocity();
     float getMassValue();
     QVector3D getCenterPosition();
+    QVector3D getOldCenterPoint();
 
     void setCenterPosition();
 
@@ -56,6 +57,7 @@ protected:
 
     QVector3D centerPosition; // position du modèle 3D dans la scène
     QVector3D force; // total des forces appliqués à notre entité
+    QVector3D oldcenterPosition; //ensemble des points de notre entité au temps t-1
 
     QVector3D velocity;
     float massValue;

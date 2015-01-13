@@ -136,6 +136,9 @@ float Entity::getMassValue(){return massValue;}
 
 QVector3D Entity::getCenterPosition(){return centerPosition;}
 
+
+QVector3D Entity::getOldCenterPoint(){return oldcenterPosition;}
+
 void Entity::setCenterPosition()
 {
     float weight = 1.0 / nbPoints;
@@ -161,6 +164,7 @@ void Entity::initialize(){
 
 void Entity::translate(QVector3D movement)
 {
+    oldcenterPosition =centerPosition;
     centerPosition += movement;
     for(int i = 0; i < nbPoints; i++)
         points[i] += movement;

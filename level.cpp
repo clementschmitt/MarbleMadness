@@ -94,6 +94,7 @@ bool Level::sphereToPlane(Face face, Entity e, QVector3D* c, QVector3D* v)
 {
     QVector3D tmp = player.getCenterPosition() - face.getCenterPosition();
     qreal dist = QVector3D::dotProduct(tmp, face.getNormal());
+    qreal oldDist = QVector3D::dotProduct((player.getOldCenterPoint() - face.getCenterPosition()), face.getNormal());
     if(dist < player.getRadius())
     {
         *c = player.getCenterPosition() - face.getNormal()*dist;
