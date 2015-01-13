@@ -60,8 +60,6 @@ protected:
 
     bool useGravity;
 
-private:
-    //QFile file;
 };
 
 #endif // ENTITY_H

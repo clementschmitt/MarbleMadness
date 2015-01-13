@@ -9,12 +9,13 @@ Entity::Entity()
 
 Entity::Entity(QString filePath)
 {
-    /*QString currentLineContent;
-    file(filePath);
+    QString currentLineContent;
+    QFile file(filePath);
     QFileInfo fileInfo(filePath);
-
+    std::cout<<fileInfo.fileName().toStdString()<<std::endl;
     if(file.open(QIODevice::ReadOnly))
     {
+        std::cout<<"Hello"<<std::endl;
         QTextStream flux(&file);
         while(!flux.atEnd())
         {
@@ -38,9 +39,11 @@ Entity::Entity(QString filePath)
             }
             if (currentLineContent.contains("end_header"))
             {
+                std::cout<<"Nb Points = "<<nbPoints<<" nbFaces = "<<nbFaces<<std::endl;
                 //Parcours de tous les points de notre modèle 3D
                 for (int i = 0; i < nbPoints; i++)
                 {
+                    std::cout<<"ligne n"<<i<<" after end header"<<std::endl;
                     currentLineContent = flux.readLine();
                     QStringList coordinateList = currentLineContent.split(" ");
 
@@ -51,6 +54,7 @@ Entity::Entity(QString filePath)
                     normals[i].setX(coordinateList.at(3).toFloat());
                     normals[i].setY(coordinateList.at(4).toFloat());
                     normals[i].setZ(coordinateList.at(5).toFloat());
+                    std::cout<<"ligne n"<<i<<" "<<points[i].x()<<" "<<points[i].y()<<" "<<points[i].z()<<std::endl;
                 }
 
                 //Parcour de toutes les faces de notre modèle 3D
@@ -59,16 +63,18 @@ Entity::Entity(QString filePath)
                     currentLineContent = flux.readLine();
                     QStringList vertexIndexList = currentLineContent.split(" ");
 
-                    faces[i].setVertex(vertexIndexList.at(1).toInt(), 0);
-                    faces[i].setVertex(vertexIndexList.at(1).toInt(), 1);
-                    faces[i].setVertex(vertexIndexList.at(2).toInt(), 2);
+                    faces[i] = Face(vertexIndexList.at(0).toInt());
+                    for(int j = 0; j < faces[i].getNbPoints(); j++)
+                    {
+                        faces[i].setVertex(vertexIndexList.at(j+1).toInt(), j);
+                    }
                 }
             }
         }
         file.close();
     }
     else
-        std::cout<< "Impossible d'ouvrir le fichier"<<std::endl;*/
+        std::cout<< "Impossible d'ouvrir le fichier"<<std::endl;
 }
 
 Face Entity::getFace(int index){return faces[index];}

@@ -34,6 +34,8 @@ Level::Level()
     plateformComponents[1] = Plateform(plateformPoints2, 4);
     limit = Plateform(plateformLimit, 4);
 
+    Entity e = Entity(":/level.ply");
+
     begin = QVector3D(0,2,0);
     player = Ball(28,28, begin);
     std::cout<<"Fin creation Level"<<std::endl;

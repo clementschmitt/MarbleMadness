@@ -72,7 +72,7 @@ void GameWindow::render()
     glRotatef(cam->getRotY(),0.0f,1.0f,0.0f);
     glTranslatef(-cam->getPos().x(), -cam->getPos().y(), -cam->getPos().z());
 
-    cout<<cam->getRotX()<<" "<<cam->getRotY()<<endl;
+    //cout<<cam->getRotX()<<" "<<cam->getRotY()<<endl;
 
     //Add ambient light
     GLfloat ambientColor[] = {0.2f, 0.2f, 0.2f, 1.0f}; //Color (0.2, 0.2, 0.2)
@@ -160,7 +160,8 @@ void GameWindow::drawBall()
 
             glVertex3f(p.x(), p.y(), p.z());
             glNormal3f(n.x(), n.y(), n.z());
-            glColor3f(0.7, 0.7, 0.7);
+            glColor3f(c.redF(), c.greenF(), c.blueF());
+            //std::cout<<(float)c.red()/255<<" "<<c.green()/255<<" "<<c.blue()/255<<std::endl;
             //glColor3f(c.red()/255, c.green()/255, c.blue()/255);
 
             //std::cout<<"Color red: "<< c.red()/255<<std::endl;
