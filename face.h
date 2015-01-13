@@ -14,10 +14,14 @@ public:
     int getVertexIndex(int);
     int getNormalIndex(int);
     QColor getColor(int);
+    QVector3D getNormal();
+    QVector3D getCenterPosition();
 
     void setVertexIndex(int*);
     void setNormalIndex(int*);
     void setColors(QColor*);
+    void setNormal(QVector3D);
+    void setCenterPosition(QVector3D);
 
     void setVertex(int, int);
     void setNormal(int, int);
@@ -28,6 +32,8 @@ private:
     int *normalIndex; // ensemble des index des normals des points de notre face
     int nbPoints; //nombre de points dans notre face
     QColor *colors; // ensemble des couleurs des points de notre face
+    QVector3D normal;
+    QVector3D centerPosition;
 };
 
 #endif // FACE_H

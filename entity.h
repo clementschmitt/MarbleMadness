@@ -17,6 +17,7 @@ class Entity
 {
 public:
     Entity();
+    Entity(QVector3D*, int);
     Entity(const QString); //Récupère les données d'un modèle 3D avec son localPath
 
     Face getFace(int);

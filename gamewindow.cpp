@@ -56,7 +56,8 @@ void GameWindow::initialize()
 
     cam->setSS(0.1);
     cam->setRotX(-45);
-    cam->setRotY(-45);
+    cam->setRotY(-15);
+    cam->setPos(level->getPlayer().getCenterPosition() - cam->getPos());
     cout<<"End of Initialization"<<endl;
 }
 
@@ -75,18 +76,17 @@ void GameWindow::render()
     //cout<<cam->getRotX()<<" "<<cam->getRotY()<<endl;
 
     //Add ambient light
-    GLfloat ambientColor[] = {0.2f, 0.2f, 0.2f, 1.0f}; //Color (0.2, 0.2, 0.2)
+    GLfloat ambientColor[] = {0.2f, 0.2f, 0.2f, 1.0f};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 
     //Add positioned light
-    GLfloat lightColor0[] = {0.5f, 0.5f, 0.5f, 1.0f}; //Color (0.5, 0.5, 0.5)
-    GLfloat lightPos0[] = {4.0f, 0.0f, 8.0f, 1.0f}; //Positioned at (4, 0, 8)
+    GLfloat lightColor0[] = {0.5f, 0.5f, 0.5f, 1.0f};
+    GLfloat lightPos0[] = {10.0f, 0.0f, 0.0f, 1.0f};
     glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
     glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 
     //Add directed light
-    GLfloat lightColor1[] = {0.5f, 0.2f, 0.2f, 1.0f}; //Color (0.5, 0.2, 0.2)
-    //Coming from the direction (-1, 0.5, 0.5)
+    GLfloat lightColor1[] = {0.5f, 0.2f, 0.2f, 1.0f};
     GLfloat lightPos1[] = {-1.0f, 0.5f, 0.5f, 0.0f};
     glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor1);
     glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
@@ -114,24 +114,60 @@ void GameWindow::render()
  */
 void GameWindow::drawLevel()
 {
-    QVector3D point;
-    glColor3f(0.0f,1.0f,1.0f);
-    glBegin(GL_TRIANGLES);
-    for (int i = 0; i < level->getNbPlateformComponent(); i++)
-    {
-        point = level->getPlateformComponent(i).getPoint(0);
-        glVertex3f(point.x(), point.y(), point.z());
-        point = level->getPlateformComponent(i).getPoint(1);
-        glVertex3f(point.x(), point.y(), point.z());
-        point = level->getPlateformComponent(i).getPoint(3);
-        glVertex3f(point.x(), point.y(), point.z());
+    Entity plateform = level->getPlateformComponent();
+    QVector3D p, n;
+    QColor c;
+    Face f;
 
-        point = level->getPlateformComponent(i).getPoint(1);
-        glVertex3f(point.x(), point.y(), point.z());
-        point = level->getPlateformComponent(i).getPoint(2);
-        glVertex3f(point.x(), point.y(), point.z());
-        point = level->getPlateformComponent(i).getPoint(3);
-        glVertex3f(point.x(), point.y(), point.z());
+    //glColor3f(0.0f,1.0f,1.0f);
+    glBegin(GL_TRIANGLES);
+    for (int i = 0; i < plateform.getNbFaces(); i++)
+    {
+        f = plateform.getFace(i);
+
+        p = plateform.getPoint(f.getVertexIndex(0));
+        n = plateform.getNormal(f.getNormalIndex(0));
+        c = f.getColor(0);
+        glVertex3f(p.x(), p.y(), p.z());
+        glNormal3f(n.x(), n.y(), n.z());
+        glColor3f(c.redF(), c.greenF(), c.blueF());
+
+        p = plateform.getPoint(f.getVertexIndex(1));
+        n = plateform.getNormal(f.getNormalIndex(1));
+        c = f.getColor(1);
+        glVertex3f(p.x(), p.y(), p.z());
+        glNormal3f(n.x(), n.y(), n.z());
+        glColor3f(c.redF(), c.greenF(), c.blueF());
+
+        p = plateform.getPoint(f.getVertexIndex(3));
+        n = plateform.getNormal(f.getNormalIndex(3));
+        c = f.getColor(3);
+        glVertex3f(p.x(), p.y(), p.z());
+        glNormal3f(n.x(), n.y(), n.z());
+        glColor3f(c.redF(), c.greenF(), c.blueF());
+
+        /* Deuxieme triangle */
+
+        p = plateform.getPoint(f.getVertexIndex(1));
+        n = plateform.getNormal(f.getNormalIndex(1));
+        c = f.getColor(1);
+        glVertex3f(p.x(), p.y(), p.z());
+        glNormal3f(n.x(), n.y(), n.z());
+        glColor3f(c.redF(), c.greenF(), c.blueF());
+
+        p = plateform.getPoint(f.getVertexIndex(2));
+        n = plateform.getNormal(f.getNormalIndex(2));
+        c = f.getColor(2);
+        glVertex3f(p.x(), p.y(), p.z());
+        glNormal3f(n.x(), n.y(), n.z());
+        glColor3f(c.redF(), c.greenF(), c.blueF());
+
+        p = plateform.getPoint(f.getVertexIndex(3));
+        n = plateform.getNormal(f.getNormalIndex(3));
+        c = f.getColor(3);
+        glVertex3f(p.x(), p.y(), p.z());
+        glNormal3f(n.x(), n.y(), n.z());
+        glColor3f(c.redF(), c.greenF(), c.blueF());
     }
     glEnd();
 }
@@ -142,7 +178,7 @@ void GameWindow::drawBall()
     QVector3D p, n;
     QColor c;
     Face f;
-
+    //cout<<"( "<<player.getCenterPosition().x()<<", "<<player.getCenterPosition().y()<<", "<<player.getCenterPosition().z()<<")"<<endl;
     //glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_TRIANGLES);
 
@@ -154,19 +190,10 @@ void GameWindow::drawBall()
             p = player.getPoint(f.getVertexIndex(j));
             n = player.getNormal(f.getNormalIndex(j));
             c = f.getColor(j);
-            //light.computeLighting(p, n);
-
-            //std::cout<<"Color red: "<< c.redF()<<std::endl;
 
             glVertex3f(p.x(), p.y(), p.z());
             glNormal3f(n.x(), n.y(), n.z());
             glColor3f(c.redF(), c.greenF(), c.blueF());
-            //std::cout<<(float)c.red()/255<<" "<<c.green()/255<<" "<<c.blue()/255<<std::endl;
-            //glColor3f(c.red()/255, c.green()/255, c.blue()/255);
-
-            //std::cout<<"Color red: "<< c.red()/255<<std::endl;
-            //std::cout<<"Color green: "<< c.green() <<std::endl;
-            //std::cout<<"Color blue: "<< c.blue() <<std::endl;
         }
     }
     glEnd();

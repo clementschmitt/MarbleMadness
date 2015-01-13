@@ -15,16 +15,15 @@ class Level
 public:
     Level();
 
-    int getNbPlateformComponent();
-    Plateform getPlateformComponent(int);
+    Entity getPlateformComponent();
     Ball getPlayer();
 
     void applyGravity(QVector3D);
     void collisionDetection();
-    bool sphereToPlane(Plateform, QVector3D*, QVector3D*);
-    bool sphereToEdge(Plateform, QVector3D*);
-    bool checkInsidePolygone(Plateform, QVector3D);
-    QVector3D projectionPointPlane(QVector3D ,Plateform);
+    bool sphereToPlane(Face, Entity, QVector3D*, QVector3D*);
+    bool sphereToEdge(Face, Entity, QVector3D*);
+    bool checkInsidePolygone(Face, Entity, QVector3D);
+    QVector3D projectionPointPlane(QVector3D, Face);
     QVector3D closestPointOnLine(QVector3D, QVector3D, QVector3D);
     float angleBetweenVectors(QVector3D, QVector3D);
     float distance(QVector3D, QVector3D);
@@ -33,13 +32,13 @@ public:
     void addLight(Light);
 
 protected:
-    Plateform* plateformComponents;
-    Plateform limit;
-    int nbPlateformComponent;
+    Entity plateformComponents;
+    Entity limit;
+
     Ball player;
+
     QVector3D begin;
     QVector3D reponse;
-
 };
 
 #endif // LEVEL_H

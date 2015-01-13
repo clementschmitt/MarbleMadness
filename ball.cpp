@@ -36,6 +36,7 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
     }
 
     int currentFace = 0;
+
     for (int horizontalNumber = 0; horizontalNumber < horizontalBands; horizontalNumber++)
     {
         for (int verticalNumber = 0; verticalNumber < verticalBands; verticalNumber++)
@@ -78,4 +79,3 @@ Ball::Ball(int horizontalBands, int verticalBands, QVector3D center)
 }
 
 float Ball::getRadius(){return radius;}
-

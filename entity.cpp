@@ -7,6 +7,29 @@ Entity::Entity()
 
 }
 
+Entity::Entity(QVector3D *pts, int nbPts)
+{
+    useGravity = false;
+    nbFaces = 1;
+    nbPoints = nbPts;
+    points = pts;
+    normals = new QVector3D[nbPoints];
+    faces = new Face[nbFaces];
+    faces[0] = Face(nbPts);
+    faces[0].setNormal(QVector3D::normal(points[0],points[1],points[2]).normalized());
+    float weight = 1.0 / nbPoints;
+    QVector3D center;
+    for(int i = 0; i < nbPts; i++)
+    {
+        normals[i] = faces[0].getNormal();
+        faces[0].setVertex(i,i);
+        faces[0].setNormal(i,i);
+        center += weight * points[i];
+    }
+    faces[0].setCenterPosition(center);
+    setCenterPosition();
+}
+
 Entity::Entity(QString filePath)
 {
     QString currentLineContent;
@@ -43,7 +66,6 @@ Entity::Entity(QString filePath)
                 //Parcours de tous les points de notre modèle 3D
                 for (int i = 0; i < nbPoints; i++)
                 {
-                    std::cout<<"ligne n"<<i<<" after end header"<<std::endl;
                     currentLineContent = flux.readLine();
                     QStringList coordinateList = currentLineContent.split(" ");
 
@@ -54,7 +76,8 @@ Entity::Entity(QString filePath)
                     normals[i].setX(coordinateList.at(3).toFloat());
                     normals[i].setY(coordinateList.at(4).toFloat());
                     normals[i].setZ(coordinateList.at(5).toFloat());
-                    std::cout<<"ligne n"<<i<<" "<<points[i].x()<<" "<<points[i].y()<<" "<<points[i].z()<<std::endl;
+                    std::cout<<"Point n"<<i<<" "<<points[i].x()<<" "<<points[i].y()<<" "<<points[i].z()<<
+                               " - "<<normals[i].x()<<" "<<normals[i].y()<<" "<<normals[i].z()<<std::endl;
                 }
 
                 //Parcour de toutes les faces de notre modèle 3D
@@ -64,10 +87,24 @@ Entity::Entity(QString filePath)
                     QStringList vertexIndexList = currentLineContent.split(" ");
 
                     faces[i] = Face(vertexIndexList.at(0).toInt());
+                    float weight = 1.0 / vertexIndexList.at(0).toInt();
+                    QVector3D center;
+                    std::cout<<"Face n"<<i<<" ";
                     for(int j = 0; j < faces[i].getNbPoints(); j++)
                     {
                         faces[i].setVertex(vertexIndexList.at(j+1).toInt(), j);
+                        faces[i].setNormal(vertexIndexList.at(j+1).toInt(), j);
+
+                        center += weight * points[vertexIndexList.at(j+1).toInt()];
+                        std::cout<<vertexIndexList.at(j+1).toInt()<<" ";
                     }
+                    faces[i].setCenterPosition(center);
+                    faces[i].setNormal(QVector3D::normal(points[vertexIndexList.at(0).toInt()],
+                                                         points[vertexIndexList.at(2).toInt()],
+                                                         points[vertexIndexList.at(1).toInt()]).normalized());
+
+                    std::cout<<"("<<faces[i].getCenterPosition().x()<<", "<<faces[i].getCenterPosition().y()<<", "<<faces[i].getCenterPosition().z()<<")"<<
+                               "("<<faces[i].getNormal().x()<<", "<<faces[i].getNormal().y()<<", "<<faces[i].getNormal().z()<<")"<<std::endl;
                 }
             }
         }
