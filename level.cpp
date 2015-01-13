@@ -225,7 +225,7 @@ void Level::applyGravity(QVector3D playerForce)
  * @brief Entity::initLighting
  * @param ambiant
  */
-void Level::initLighting(QColor ambiant)
+/*void Level::initLighting(QColor ambiant)
 {
     // Init pour le player
     for (int i =0; i < player.getNbFaces(); i++)
@@ -243,11 +243,11 @@ void Level::initLighting(QColor ambiant)
     {
         for(int j = 0; j < plateformComponents[i].getFace().getNbPoints(); j++)
             plateformComponents[i].getFace().setColor(ambiant, j);
-    }*/
+    }
     std::cout<<"Init Lighting"<<std::endl;
-}
+}*/
 
-void Level::addLight(Light light)
+/*void Level::addLight(Light light)
 {
     QColor c;
 
@@ -277,8 +277,7 @@ void Level::addLight(Light light)
             plateformComponents[i].getFace().getColor(j).setGreen(plateformComponents[i].getFace().getColor(j).green() + c.green());
             plateformComponents[i].getFace().getColor(j).setBlue(plateformComponents[i].getFace().getColor(j).blue() + c.blue());
         }
-    }*/
+    }
 
-    std::cout<<"ADD Light"<<std::endl;
 
-}
+}*/

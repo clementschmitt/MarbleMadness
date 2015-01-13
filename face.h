@@ -11,9 +11,12 @@ public:
     Face(int);
 
     int getNbPoints();
-    int getVertexIndex(int);
-    int getNormalIndex(int);
+    int getVertex(int);
+    int getNormal(int);
     QColor getColor(int);
+
+    int* getVertexIndex();
+    int* getNormalIndex();
 
     void setVertexIndex(int*);
     void setNormalIndex(int*);

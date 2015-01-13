@@ -148,3 +148,13 @@ void Entity::applyForce()
 }
 
 void Entity::addForce(QVector3D f){force += f;}
+
+
+void Entity::initNormal()
+{
+    for (int i = 0; i < nbFaces; i++)
+    {
+        for (int j = 0; j < nbPoints; j++)
+            faces[i].setNormal(faces[i].getNormal(j) + faces[i].getNormalIndex()[j], j);
+    }
+}
