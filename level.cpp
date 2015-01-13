@@ -56,7 +56,7 @@ void Level::collisionDetection()
             colNorm.normalize();
             player.translate(*(off));
 
-            float j = -(0.5)* QVector3D::dotProduct((player.getMassValue()*player.getVelocity()), colNorm);
+            float j = -(0.3)* QVector3D::dotProduct((player.getMassValue()*player.getVelocity()), colNorm);
             QVector3D bounce = (j * colNorm);
             QVector3D friction = (0.99) * (projectionPointPlane(player.getCenterPosition()+player.getVelocity(), face) - *col);
             reponse = bounce + friction;
@@ -113,8 +113,8 @@ bool Level::sphereToEdge(Face face, Entity e, QVector3D* c)
 
     for(int i = 0; i < face.getNbPoints(); i++)
     {
-        point = closestPointOnLine(e.getPoint(face.getVertexIndex(i)),
-                                   e.getPoint(face.getVertexIndex(i + 1) % face.getNbPoints()),
+        point = closestPointOnLine(e.getPoint(face.getVertex(i)),
+                                   e.getPoint(face.getVertex((i+1)%face.getNbPoints())),
                                    player.getCenterPosition());
 
         if(distance(point, player.getCenterPosition()) < player.getRadius())
@@ -133,8 +133,8 @@ bool Level::checkInsidePolygone(Face face, Entity e, QVector3D intersect)
 
     for(int i = 0; i < face.getNbPoints(); i++)
     {
-        A = e.getPoint(face.getVertexIndex(i)) - intersect;
-        B = e.getPoint(face.getVertexIndex((i+1)%face.getNbPoints())) - intersect;
+        A = e.getPoint(face.getVertex(i)) - intersect;
+        B = e.getPoint(face.getVertex((i+1)%face.getNbPoints())) - intersect;
         float a = angleBetweenVectors(A, B);
         angle += a;
     }

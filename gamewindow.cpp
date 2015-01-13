@@ -125,22 +125,22 @@ void GameWindow::drawLevel()
     {
         f = plateform.getFace(i);
 
-        p = plateform.getPoint(f.getVertexIndex(0));
-        n = plateform.getNormal(f.getNormalIndex(0));
+        p = plateform.getPoint(f.getVertex(0));
+        n = plateform.getNormal(f.getNormal(0));
         c = f.getColor(0);
         glVertex3f(p.x(), p.y(), p.z());
         glNormal3f(n.x(), n.y(), n.z());
         glColor3f(c.redF(), c.greenF(), c.blueF());
 
-        p = plateform.getPoint(f.getVertexIndex(1));
-        n = plateform.getNormal(f.getNormalIndex(1));
+        p = plateform.getPoint(f.getVertex(1));
+        n = plateform.getNormal(f.getNormal(1));
         c = f.getColor(1);
         glVertex3f(p.x(), p.y(), p.z());
         glNormal3f(n.x(), n.y(), n.z());
         glColor3f(c.redF(), c.greenF(), c.blueF());
 
-        p = plateform.getPoint(f.getVertexIndex(3));
-        n = plateform.getNormal(f.getNormalIndex(3));
+        p = plateform.getPoint(f.getVertex(3));
+        n = plateform.getNormal(f.getNormal(3));
         c = f.getColor(3);
         glVertex3f(p.x(), p.y(), p.z());
         glNormal3f(n.x(), n.y(), n.z());
@@ -148,22 +148,22 @@ void GameWindow::drawLevel()
 
         /* Deuxieme triangle */
 
-        p = plateform.getPoint(f.getVertexIndex(1));
-        n = plateform.getNormal(f.getNormalIndex(1));
+        p = plateform.getPoint(f.getVertex(1));
+        n = plateform.getNormal(f.getNormal(1));
         c = f.getColor(1);
         glVertex3f(p.x(), p.y(), p.z());
         glNormal3f(n.x(), n.y(), n.z());
         glColor3f(c.redF(), c.greenF(), c.blueF());
 
-        p = plateform.getPoint(f.getVertexIndex(2));
-        n = plateform.getNormal(f.getNormalIndex(2));
+        p = plateform.getPoint(f.getVertex(2));
+        n = plateform.getNormal(f.getNormal(2));
         c = f.getColor(2);
         glVertex3f(p.x(), p.y(), p.z());
         glNormal3f(n.x(), n.y(), n.z());
         glColor3f(c.redF(), c.greenF(), c.blueF());
 
-        p = plateform.getPoint(f.getVertexIndex(3));
-        n = plateform.getNormal(f.getNormalIndex(3));
+        p = plateform.getPoint(f.getVertex(3));
+        n = plateform.getNormal(f.getNormal(3));
         c = f.getColor(3);
         glVertex3f(p.x(), p.y(), p.z());
         glNormal3f(n.x(), n.y(), n.z());
@@ -217,16 +217,16 @@ void GameWindow::keyPressEvent(QKeyEvent *event)
     switch(event->key())
     {
     case Qt::Key_Up :
-        playerForce.setZ(playerForce.z()+10);
+        playerForce.setZ(playerForce.z()+15);
         break;
     case Qt::Key_Down :
-        playerForce.setZ(playerForce.z()-10);
+        playerForce.setZ(playerForce.z()-15);
         break;
     case Qt::Key_Left :
-        playerForce.setX(playerForce.x()-10);
+        playerForce.setX(playerForce.x()-15);
         break;
     case Qt::Key_Right :
-        playerForce.setX(playerForce.x()+10);
+        playerForce.setX(playerForce.x()+15);
         break;
     case 'A':
         cam->setRotX(cam->getRotX()+1.0f);

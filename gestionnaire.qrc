@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>level.ply</file>
+        <file>levelMin.ply</file>
     </qresource>
 </RCC>

@@ -98,16 +98,20 @@ Entity::Entity(QString filePath)
                         center += weight * points[vertexIndexList.at(j+1).toInt()];
                         std::cout<<vertexIndexList.at(j+1).toInt()<<" ";
                     }
+                    std::cout<<std::endl;
                     faces[i].setCenterPosition(center);
-                    faces[i].setNormal(QVector3D::normal(points[vertexIndexList.at(0).toInt()],
+                    faces[i].setNormal(QVector3D::normal(points[vertexIndexList.at(1).toInt()],
                                                          points[vertexIndexList.at(2).toInt()],
-                                                         points[vertexIndexList.at(1).toInt()]).normalized());
-
+                                                         points[vertexIndexList.at(3).toInt()]).normalized());
+                    /*std::cout<<"("<<points[vertexIndexList.at(1).toInt()].x()<<", "<<points[vertexIndexList.at(1).toInt()].y()<<", "<<points[vertexIndexList.at(1).toInt()].z()<<")"<<
+                               "("<<points[vertexIndexList.at(2).toInt()].x()<<", "<<points[vertexIndexList.at(2).toInt()].y()<<", "<<points[vertexIndexList.at(2).toInt()].z()<<")"<<
+                               "("<<points[vertexIndexList.at(3).toInt()].x()<<", "<<points[vertexIndexList.at(3).toInt()].y()<<", "<<points[vertexIndexList.at(3).toInt()].z()<<")"<<std::endl;*/
                     std::cout<<"("<<faces[i].getCenterPosition().x()<<", "<<faces[i].getCenterPosition().y()<<", "<<faces[i].getCenterPosition().z()<<")"<<
                                "("<<faces[i].getNormal().x()<<", "<<faces[i].getNormal().y()<<", "<<faces[i].getNormal().z()<<")"<<std::endl;
                 }
             }
         }
+        initNormal();
         file.close();
     }
     else
@@ -189,9 +193,16 @@ void Entity::addForce(QVector3D f){force += f;}
 
 void Entity::initNormal()
 {
+    QVector3D zero;
+    for (int i = 0; i < nbPoints; i++)
+    {
+        normals[i] = zero;
+    }
+
     for (int i = 0; i < nbFaces; i++)
     {
-        for (int j = 0; j < nbPoints; j++)
-            faces[i].setNormal(faces[i].getNormal(j) + faces[i].getNormalIndex()[j], j);
+        Face f = faces[i];
+        for (int j = 0; j < f.getNbPoints(); j++)
+            normals[f.getNormal(j)] += f.getNormal();
     }
 }
