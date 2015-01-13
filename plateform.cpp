@@ -23,6 +23,7 @@ Plateform::Plateform(QVector3D *pts, int nbPts)
     face = Face(nbFaces);
     points = pts;
     setCenterPosition();
+
 }
 
 Face Plateform::getFace(){return face;}

@@ -18,15 +18,20 @@ Face::Face(int size)
 
 int Face::getNbPoints(){return nbPoints;}
 
-int Face::getVertexIndex(int i){return vertexIndex[i];}
+int Face::getVertex(int i){return vertexIndex[i];}
 
-int Face::getNormalIndex(int i){return normalIndex[i];}
+int Face::getNormal(int i){return normalIndex[i];}
 
 QColor Face::getColor(int i){return colors[i];}
 
 QVector3D Face::getNormal(){return normal;}
 
 QVector3D Face::getCenterPosition(){return centerPosition;}
+
+int* Face::getVertexIndex(){return vertexIndex;}
+
+int* Face::getNormalIndex(){return normalIndex;}
+
 
 void Face::setVertexIndex(int *verIn){vertexIndex = verIn;}
 

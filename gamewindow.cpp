@@ -187,8 +187,8 @@ void GameWindow::drawBall()
         f = player.getFace(i);
         for(int j = 0; j < f.getNbPoints(); j++)
         {
-            p = player.getPoint(f.getVertexIndex(j));
-            n = player.getNormal(f.getNormalIndex(j));
+            p = player.getPoint(f.getVertex(j));
+            n = player.getNormal(f.getNormal(j));
             c = f.getColor(j);
 
             glVertex3f(p.x(), p.y(), p.z());

@@ -13,6 +13,7 @@ public:
     Face getFace();
 
     QVector3D getNormal();
+    void initNormal();
 
 private:
     Face face;

@@ -40,9 +40,10 @@ public:
     void translate(QVector3D);
     void reset(QVector3D);
     void resetVelocity();
-
     void applyForce();
     void addForce(QVector3D);
+
+    void initNormal();
 
 protected:
 
@@ -51,7 +52,7 @@ protected:
     int nbPoints;
 
     QVector3D *points; //ensemble des points de notre entité
-    QVector3D *normals; //sensemble des normales des sommets
+    QVector3D *normals; //ensemble des normales des sommets
 
     QVector3D centerPosition; // position du modèle 3D dans la scène
     QVector3D force; // total des forces appliqués à notre entité
