@@ -25,7 +25,7 @@ Level::Level()
     plateformLimit[3] = QVector3D(50, -5, -50);
 
     std::cout <<"Creation du level"<<std::endl;
-    plateformComponents = Entity(":/level.ply");
+    plateformComponents = Entity(":/level4.ply");
     //plateformComponents = Entity(plateformPoints1, 4);
 
     limit = Entity(plateformLimit, 4);
